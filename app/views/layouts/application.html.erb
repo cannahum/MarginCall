@@ -33,7 +33,12 @@
       </div>
     </nav>
     <!-- Yield swaps in individual html data from other views, for example if I go to trigger create new form it will put the triggers/_form.html.erb data where yield is.-->
-	<%= yield %>
+    <div class="row">
+    	<div class="col-md-12">
+    		<%= yield %>	
+    	</div>
+    </div>
+	
 
 </body>
 </html>
