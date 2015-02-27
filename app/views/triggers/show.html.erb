@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Useremail:</strong>
+  <%= @trigger.userEmail %>
+</p>
+
+<p>
+  <strong>Ticker:</strong>
+  <%= @trigger.ticker %>
+</p>
+
+<p>
+  <strong>Trigger price:</strong>
+  <%= @trigger.trigger_price %>
+</p>
+
+<%= link_to 'Edit', edit_trigger_path(@trigger) %> |
+<%= link_to 'Back', triggers_path %>

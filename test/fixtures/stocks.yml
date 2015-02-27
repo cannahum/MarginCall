@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticker: MyString
+  company_name: MyString
+  current_price: 9.99
+
+two:
+  ticker: MyString
+  company_name: MyString
+  current_price: 9.99
