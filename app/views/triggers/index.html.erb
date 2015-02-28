@@ -28,6 +28,7 @@
                 <td><%= link_to 'Show', trigger %></td>
                 <td><%= link_to 'Edit', edit_trigger_path(trigger) %></td>
                 <td><%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><a href="#" data-toggle="modal" data-target="#largeModal">Graph</a></td>
               </tr>
             <% end %>
           </tbody>
@@ -39,4 +40,16 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- Insert graph component here not really sure how -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
