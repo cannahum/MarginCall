@@ -1,35 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="vertical-center-row">
+    <div class="col-xs-12" style="vertical-align:middle" align="center">
+      <p id="notice"><%= notice %></p>
 
-<h1>Listing Users</h1>
+      <h1>Listing Users</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>F name</th>
-      <th>L name</th>
-      <th>P number</th>
-      <th>Email1</th>
-      <th>Email2</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>F name</th>
+            <th>L name</th>
+            <th>P number</th>
+            <th>Email1</th>
+            <th>Email2</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.f_name %></td>
-        <td><%= user.l_name %></td>
-        <td><%= user.p_number %></td>
-        <td><%= user.email1 %></td>
-        <td><%= user.email2 %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.f_name %></td>
+              <td><%= user.l_name %></td>
+              <td><%= user.p_number %></td>
+              <td><%= user.email1 %></td>
+              <td><%= user.email2 %></td>
+              <td><%= link_to 'Show', user %></td>
+              <td><%= link_to 'Edit', edit_user_path(user) %></td>
+              <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<br>
+      <br>
 
-<%= link_to 'New User', new_user_path %>
+      <%= link_to 'New User', new_user_path %>
+    </div>
+  </div>
+</div>
