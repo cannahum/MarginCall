@@ -19,3 +19,10 @@ Trigger.create!(userEmail:"cannahum@outlook.com", ticker:"GE", trigger_price:70.
 Trigger.create!(userEmail:"saultbeile@outlook.com", ticker:"AAPL", trigger_price:105.00)
 Trigger.create!(userEmail:"saultbeile@outlook.com", ticker:"MSFT", trigger_price:48.00)
 Trigger.create!(userEmail:"saultbeile@outlook.com", ticker:"GE", trigger_price:73.00)
+
+
+Stock.delete_all
+Stock.create!(ticker:'AAPL', current_price: 0)
+Stock.create!(ticker:'MSFT', current_price: 0)
+Stock.create!(ticker:'F', current_price: 0)
+Stock.create!(ticker:'TSLA', current_price: 0)
