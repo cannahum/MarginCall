@@ -3,6 +3,11 @@ require 'test_helper'
 class TriggersControllerTest < ActionController::TestCase
   setup do
     @trigger = triggers(:one)
+    @update = {
+      userEmail: 'myname@email.com',
+      ticker: 'AAPL',
+      trigger_price: '98.05'
+    }
   end
 
   test "should get index" do

@@ -3,6 +3,13 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
+    @update = {
+      f_name:   'Someone',
+      l_name:   'Something',
+      p_number: 'my_phone_number',
+      email1:   'someone.something@somethingelse.com',
+      email2:   'myotheremail@gmail.com' 
+    }
   end
 
   test "should get index" do
