@@ -1,12 +1,9 @@
 require 'open-uri'
 require 'csv'
-require 'pry'
+
 
 class StockService < ActiveRecord::Base
 
-	def initialize
-		puts "hello world"
-	end
 	
 	# This method is for running each ticker through the API call.
 	def prepare_stocks
@@ -25,5 +22,6 @@ class StockService < ActiveRecord::Base
 
 	def read_csv(stock, info)
 		stock.current_price = update_info[3]
+		Price.create(ticker:line[1], price:line[2])
 	end
 end
