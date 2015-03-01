@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.delete_all
-User.create!(f_name:"Jon", l_name:"Nahum", p_number:"617-909-7873", email1:"cannahum@brandeis.edu", email2:"cannahum@outlook.com")
-User.create!(f_name:"Saul", l_name:"Tbeile", p_number:"917-922-3453", email1:"saultbeile@gmail.com", email2:"saultbeile@outlook.com")
+	# User.delete_all
+	# User.create!(f_name:"Jon", l_name:"Nahum", p_number:"617-909-7873", email1:"cannahum@brandeis.edu", email2:"cannahum@outlook.com")
+	# User.create!(f_name:"Saul", l_name:"Tbeile", p_number:"917-922-3453", email1:"saultbeile@gmail.com", email2:"saultbeile@outlook.com")
 
 
 Trigger.delete_all

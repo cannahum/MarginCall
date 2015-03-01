@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-	validates :f_name, :l_name, :email1, presence: true
+	validates :name, presence:true, uniqueness:true
+	has_secure_password
 end

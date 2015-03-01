@@ -1,10 +1,29 @@
 Rails.application.routes.draw do
-  get 'store/index'
+  get 'admin' => 'admin#index'
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+  # get 'homepage/index'
 
-  resources :triggers
+  # get 'admin/index'
+
+  # get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
 
   resources :users
 
+  # get 'homepage/index'
+
+  resources :triggers
+
+  resources :stocks
+
+  root 'homepage#index', as: 'homepage'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -59,4 +78,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
 end

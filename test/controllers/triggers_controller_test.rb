@@ -26,7 +26,7 @@ class TriggersControllerTest < ActionController::TestCase
       post :create, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price, userEmail: @trigger.userEmail }
     end
 
-    assert_redirected_to trigger_path(assigns(:trigger))
+    assert_redirected_to trigger_path (assigns(:trigger))
   end
 
   test "should show trigger" do
@@ -41,7 +41,7 @@ class TriggersControllerTest < ActionController::TestCase
 
   test "should update trigger" do
     patch :update, id: @trigger, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price, userEmail: @trigger.userEmail }
-    assert_redirected_to trigger_path(assigns(:trigger))
+    assert_redirected_to trigger_path #(assigns(:trigger))
   end
 
   test "should destroy trigger" do

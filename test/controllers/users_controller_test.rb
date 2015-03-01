@@ -3,13 +3,6 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
-    @update = {
-      f_name:   'Someone',
-      l_name:   'Something',
-      p_number: 'my_phone_number',
-      email1:   'someone.something@somethingelse.com',
-      email2:   'myotheremail@gmail.com' 
-    }
   end
 
   test "should get index" do
@@ -25,10 +18,10 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { email1: @user.email1, email2: @user.email2, f_name: @user.f_name, l_name: @user.l_name, p_number: @user.p_number }
+      post :create, user: { name: 'sam', password: 'secret', password_confirmation: 'secret', email1: @user.email1, email2: @user.email2, p_number: @user.p_number }
     end
 
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to user_path (assigns(:user))
   end
 
   test "should show user" do
@@ -42,8 +35,8 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { email1: @user.email1, email2: @user.email2, f_name: @user.f_name, l_name: @user.l_name, p_number: @user.p_number }
-    assert_redirected_to user_path(assigns(:user))
+    patch :update, id: @user, user: { email1: @user.email1, email2: @user.email2, name: @user.name, p_number: @user.p_number, password: 'secret', password_confirmation: 'secret' }
+    assert_redirected_to user_path (assigns(:user))
   end
 
   test "should destroy user" do
