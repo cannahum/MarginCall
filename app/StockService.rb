@@ -21,7 +21,7 @@ class StockService < ActiveRecord::Base
 	end
 
 	def read_csv(stock, info)
-		stock.current_price = update_info[3]
+		stock.current_price = info[3]
 		Price.create(ticker:line[1], price:line[2])
 	end
 end
