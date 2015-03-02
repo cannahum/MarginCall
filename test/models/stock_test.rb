@@ -15,7 +15,7 @@ class StockTest < ActiveSupport::TestCase
 
 		stock.current_price = 'lame'
 		assert stock.invalid?
-		assert_equal 'must be a valid number', stock.errors[:current_price].join('; ')
+		assert_equal 'is not a number', stock.errors[:current_price].join('; ')
 
 		stock.current_price = 100
 		assert stock.valid?
@@ -24,6 +24,6 @@ class StockTest < ActiveSupport::TestCase
 	test "this stock is already in the system" do
 		stock = Stock.new(ticker: stocks(:one).ticker, current_price: 3)
 		assert stock.invalid?
-		assert_equal ["already in the system"], stock.errors[:ticker]
+		assert_equal ["has already been taken"], stock.errors[:ticker]
 	end
 end

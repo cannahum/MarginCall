@@ -16,7 +16,7 @@ class TriggerTest < ActiveSupport::TestCase
 
 		trigger.trigger_price = 'lame'
 		assert trigger.invalid?
-		assert_equal 'must be a valid number', trigger.errors[:trigger_price].join('; ')
+		assert_equal 'is not a number', trigger.errors[:trigger_price].join('; ')
 
 		trigger.trigger_price = 100
 		assert trigger.valid?
