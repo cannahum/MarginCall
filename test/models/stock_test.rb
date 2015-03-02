@@ -8,6 +8,7 @@ class StockTest < ActiveSupport::TestCase
 		assert stock.invalid?
 		assert stock.errors[:ticker].any?
 		assert stock.errors[:current_price].any?
+		#puts 'testran'
 	end
 
 	test "stock price must be a number" do
@@ -19,6 +20,7 @@ class StockTest < ActiveSupport::TestCase
 
 		stock.current_price = 100
 		assert stock.valid?
+
 	end
 
 	test "this stock is already in the system" do
@@ -26,4 +28,6 @@ class StockTest < ActiveSupport::TestCase
 		assert stock.invalid?
 		assert_equal ["has already been taken"], stock.errors[:ticker]
 	end
+	
+
 end

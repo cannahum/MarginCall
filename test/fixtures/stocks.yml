@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  ticker: MyString
-  company_name: MyString
-  current_price: 9.99
+  ticker: APPL
+  company_name: Apple
+  current_price: 100
 
 two:
-  ticker: MyString
-  company_name: MyString
-  current_price: 9.99
+  ticker: GOOG
+  company_name: Google
+  current_price: 570
