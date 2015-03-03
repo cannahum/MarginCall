@@ -2,21 +2,28 @@
 	<% if flash[:alert] %>
 		<p id="notice"><%= flash[:alert] %></p>
 	<% end %>
-	<%= form_tag do %>
+	<%= form_for(:session, url: login_path) do |f| %>
 		<fieldset>
+			<% provide(:title, "Log In") %>
 			<legend>Please Log In</legend>
 			<div>
-				<%= label_tag :name %>
-				<%= text_field_tag :name, params[:name] %>
+				<%= f.label :email %>
+				<%= f.email_field :email1, class: 'form-control' %>
 			</div>
 			<div>
-				<%= label_tag :password %>
-				<%= password_field_tag :password, params[:password] %>
+				<%= f.label :password %>
+				<%= f.password_field :password, class: 'form-control' %>
 			</div>
 			<div>
-				<%= submit_tag "Login" %>
+				<%= f.label :remember_me, class: "checkbox inline" do %>
+					<%=f.check_box :remember_me%>
+					<span>Remember me on this computer</span>
+				<% end %>
+			<div>
+				<%= f.submit "Log In", class: "btn btn-primary" %>
 			</div>
 		</fieldset>
-		<p>Not a User Yet? <%= link_to 'Sign Up', new_user_path %></p>
 	<% end %>
+	<p>Not a User Yet? <%= link_to 'Sign Up', new_user_path %></p>
+
 </div>

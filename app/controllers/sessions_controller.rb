@@ -1,18 +1,22 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorize
-	
+    def new
+    end
+
   	def create
-		user = User.find_by(name: params[:name])
-  		if user and user.authenticate(params[:password])
-  			session[:user_id] = user.id
-  			redirect_to admin_path
-  		else
-  			redirect_to login_url, alert: "Invalid user/password combination"
-		end
-	end
+      user = User.find_by(email1: params[:session][:email1].downcase)
+      if user && user.authenticate(params[:session][:password])
+        # Log the user in and redirect to user's show page
+          log_in user
+          params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+          redirect_to user
+      else
+        flash.now[:danger] = 'Invalid email/password combination'
+        render 'new'
+      end  
+	  end
 
     def destroy
-    	session[:user_id] = nil
-    	redirect_to homepage_url, notice: "Logged out"
+      log_out if logged_in?
+      redirect_to homepage_url
   	end
 end
