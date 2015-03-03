@@ -51,3 +51,5 @@ gem 'better_errors'
 gem 'minitest-spec-rails'
 
 gem 'bootstrap-sass'
+
+gem 'rails_admin'

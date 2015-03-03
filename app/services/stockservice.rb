@@ -25,4 +25,8 @@ class StockService < ActiveRecord::Base
 		stock.save
 		Price.create(ticker:line[1], price:line[2])
 	end
+
+	def printmyname
+		puts can
+	end
 end
