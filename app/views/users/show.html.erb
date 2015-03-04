@@ -7,19 +7,39 @@
 </p>
 
 <p>
-  <strong>Email1:</strong>
+  <strong>Primary Email:</strong>
   <%= @user.email1 %>
 </p>
 
 <p>
-  <strong>Email2:</strong>
+  <strong>Secondary Email:</strong>
   <%= @user.email2 %>
 </p>
 
 <p>
-  <strong>P number:</strong>
+  <strong>Phone number:</strong>
   <%= @user.p_number %>
 </p>
+<!-- Table of user's triggers -->
+<table class="table table-striped">
+	<thead>
+		<tr align="center">Triggers for <%=@user.name%></tr>
+		<tr>
+			<th>Ticker</th>
+			<th>Trigger Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		 <% Trigger.all.each do |trigger| %>
+		 <% if trigger.userEmail == @user.email1%>
+		 	<tr>
+		 		<td><%= trigger.ticker %></td>
+                <td><%= trigger.trigger_price %></td>
+		 	</tr>
+		 <%end%>
+		 <%end%>
+	</tbody>
+</table>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', homepage_path %>
