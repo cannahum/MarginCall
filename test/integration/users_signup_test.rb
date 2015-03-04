@@ -1,4 +1,6 @@
 require 'test_helper'
+require 'pry'
+require 'pry-byebug'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
@@ -21,7 +23,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 										password: "password",
 										password_confirmation: "password" }
 		end
-		#assert_template "users/:id"
+		assert_redirected_to controller: 'homepage', action: 'index'
 		assert is_logged_in?
 	end
 

@@ -1,5 +1,7 @@
+require 'pry'
+require 'pry-byebug'
+
 class UsersController < ApplicationController
-  skip_before_action :authorize
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
