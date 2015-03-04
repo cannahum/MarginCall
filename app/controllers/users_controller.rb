@@ -2,6 +2,10 @@ require 'pry'
 require 'pry-byebug'
 
 class UsersController < ApplicationController
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 6884488889b328ebf0d57496ba0ccae4deb556a0
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
