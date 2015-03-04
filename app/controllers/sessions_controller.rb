@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
     def new
+      if logged_in?
+        redirect_to homepage_url
+      end
     end
 
   	def create
