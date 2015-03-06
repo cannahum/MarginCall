@@ -35,11 +35,16 @@
 		 	<tr>
 		 		<td><%= trigger.ticker %></td>
                 <td><%= trigger.trigger_price %></td>
+                <td><%= link_to 'Show', trigger %></td>
+                <td><%= link_to 'Edit', edit_trigger_path(trigger) %></td>
+                <td><%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		 	</tr>
 		 <%end%>
 		 <%end%>
 	</tbody>
 </table>
 
+<!-- Add new trigger -->
+<%= link_to 'Add Trigger', new_trigger_path %> |
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', homepage_path %>
