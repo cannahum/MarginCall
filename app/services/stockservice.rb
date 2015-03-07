@@ -4,6 +4,9 @@ require 'csv'
 
 class StockService < ActiveRecord::Base
 
+	def intialize
+		
+	end
 	
 	# This method is for running each ticker through the API call.
 	def prepare_stocks
