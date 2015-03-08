@@ -43,8 +43,8 @@ class TriggersController < ApplicationController
       end
     #if not logged in it redirects you to login page
     else
+      flash[:danger] = 'Please log in to set a new trigger.'
       redirect_to login_path
-      flash.now[:danger] = 'Please log in to set a new trigger.'
     end
   end
 
