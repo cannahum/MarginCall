@@ -8,7 +8,6 @@ class TriggerTest < ActiveSupport::TestCase
 		assert trigger.invalid?
 		assert trigger.errors[:ticker].any?
 		assert trigger.errors[:trigger_price].any?
-		assert trigger.errors[:userEmail].any?
 	end
 
 	test "trigger price must be a number" do

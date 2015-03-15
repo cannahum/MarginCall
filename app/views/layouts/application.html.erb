@@ -48,10 +48,13 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    
     <!-- Yield swaps in individual html data from other views, for example if I go to trigger create new form it will put the triggers/_form.html.erb data where yield is.-->
     <div class="container" style="margin-top: 50px">
 
-
+<% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
     			<%= yield %>
 
           <%= debug(params) if Rails.env.development? %>

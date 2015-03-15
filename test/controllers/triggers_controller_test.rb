@@ -4,7 +4,6 @@ class TriggersControllerTest < ActionController::TestCase
   setup do
     @trigger = triggers(:one)
     @update = {
-      userEmail: 'myname@email.com',
       ticker: 'AAPL',
       trigger_price: '98.05'
     }
@@ -23,7 +22,7 @@ class TriggersControllerTest < ActionController::TestCase
 
   test "should create trigger" do
     assert_difference('Trigger.count') do
-      post :create, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price, userEmail: @trigger.userEmail }
+      post :create, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price }
     end
 
     assert_redirected_to trigger_path (assigns(:trigger))
@@ -40,7 +39,7 @@ class TriggersControllerTest < ActionController::TestCase
   end
 
   test "should update trigger" do
-    patch :update, id: @trigger, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price, userEmail: @trigger.userEmail }
+    patch :update, id: @trigger, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price }
     assert_redirected_to trigger_path #(assigns(:trigger))
   end
 
@@ -51,4 +50,11 @@ class TriggersControllerTest < ActionController::TestCase
 
     assert_redirected_to triggers_path
   end
+  
+  test "should redirect to login if not logged in" do
+    logout
+    post :create, trigger: { ticker: @trigger.ticker, trigger_price: @trigger.trigger_price }
+    assert_redirected_to login_path
+  end
+  
 end

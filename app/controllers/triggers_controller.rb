@@ -1,3 +1,6 @@
+require 'pry'
+require 'pry-byebug'
+
 class TriggersController < ApplicationController
   before_action :set_trigger, only: [:show, :edit, :update, :destroy]
 
@@ -25,15 +28,23 @@ class TriggersController < ApplicationController
   # POST /triggers.json
   def create
     @trigger = Trigger.new(trigger_params)
-
-    respond_to do |format|
-      if @trigger.save
-        format.html { redirect_to @trigger, notice: 'Trigger was successfully created.' }
-        format.json { render :show, status: :created, location: @trigger }
-      else
-        format.html { render :new }
-        format.json { render json: @trigger.errors, status: :unprocessable_entity }
+    #checks if logged in and takes in form submittion to set a Trigger
+    if logged_in?
+      respond_to do |format|
+        if @trigger.save
+          @trigger.userEmail = current_user.email1
+          @trigger.save
+          format.html { redirect_to @trigger, notice: 'Trigger was successfully created.' }
+          format.json { render :show, status: :created, location: @trigger }         
+        else
+          format.html { render :new }
+          format.json { render json: @trigger.errors, status: :unprocessable_entity }
+        end
       end
+    #if not logged in it redirects you to login page
+    else
+      flash[:danger] = 'Please log in to set a new trigger.'
+      redirect_to login_path
     end
   end
 
