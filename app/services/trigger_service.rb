@@ -3,7 +3,7 @@
 # this class is a service through which the application will be checking if a trigger
 # is realized. If the stock price has reached a user's trigger, then the user gets
 # notified.
-class TrigerService < ActiveRecord::Base
+class TriggerService
 
 	Trigger.all.each do |trigger_record|
 		current_price = Stock.find(trigger_record[1])
@@ -27,3 +27,4 @@ class TrigerService < ActiveRecord::Base
 
 	def contacttrigger
 	end
+end
