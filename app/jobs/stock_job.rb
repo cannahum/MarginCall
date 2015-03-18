@@ -23,7 +23,7 @@ class StockJob
   		(1...stocks.length()).each do |i|
   			ticker_string = ticker_string + "+" + stocks[i]
   		end
-
+  		puts ticker_string
   		return ticker_string
   	end
 
@@ -36,7 +36,8 @@ class StockJob
 		index=1
 		info.each do |row|
 			Stock.find(index)[:current_price] = row[3].to_f
-			puts "#{Stock.find(index)[:name]}: #{Stock.find(index)[:current_price]}"
+			puts "Fuck shit #{Stock.find(index)[:ticker]}: #{Stock.find(index)[:current_price].to_s}"
+			index=index+1
 		end
   	end
 end
