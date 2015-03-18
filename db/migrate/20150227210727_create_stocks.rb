@@ -6,6 +6,7 @@ class CreateStocks < ActiveRecord::Migration
       t.decimal :current_price, precision: 8, scale: 2
 
       t.timestamps null: false
+      #hello
     end
   end
 end
