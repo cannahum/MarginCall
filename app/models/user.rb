@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :triggers
 	attr_accessor :remember_token
 	before_save { self.email1 = email1.downcase }
 	validates :name, presence:true, length: { maximum: 50 }
