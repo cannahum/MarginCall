@@ -53,6 +53,3 @@ gem 'minitest-spec-rails'
 gem 'bootstrap-sass'
 gem 'puma'
 gem 'rails_admin'
-
-#active jobs article says we need resque scheduler:
-gem 'resque-scheduler'
