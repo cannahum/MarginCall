@@ -39,7 +39,7 @@ group :development, :test do
 	gem 'sqlite3'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
+	gem 'puma'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -54,5 +54,5 @@ gem 'better_errors'
 gem 'minitest-spec-rails'
 
 gem 'bootstrap-sass'
-gem 'puma'
+
 gem 'rails_admin'
