@@ -1,43 +1,37 @@
 class StockJob
+	require 'bigdecimal'
+	require 'bigdecimal/util'
 
 	# helps create the String that goes into the api, sends the request
-    def self.perform
-        ActiveRecord::Base.connection_pool.with_connection do
-        	stock_string = construct_stock_string
-      	    info = api_call_and_send(stock_string)
-    	end
+  def self.perform
+    ActiveRecord::Base.connection_pool.with_connection do
+    stock_string = construct_stock_string
+    api_call_and_send(stock_string)
     end
+  end
 
-    def self.test_perform
-    	puts "Testing"
-    end
-
-    # constructs a string of ticker names for the api call.
-    def self.construct_stock_string
-    	stocks = Array.new
-    	Stock.all.each do |stock|
-    		stocks.push(stock[:ticker])
-    	end
-
-    	ticker_string = stocks[0]
-  		(1...stocks.length()).each do |i|
-  			ticker_string = ticker_string + "+" + stocks[i]
-  		end
-  		puts ticker_string
-  		return ticker_string
+  # constructs a string of ticker names for the api call.
+  def self.construct_stock_string	
+    ticker_string = ""
+  	Stock.all.each do |stock|
+  			ticker_string << "+" + stock[:ticker]
   	end
+    
+    #return the string from the first element to the last. (ignore the initial "+")
+    return ticker_string[1..-1]
+  end
 
-  	# takes the ticker string, attaches it appropriately to the api url
-  	# and returns a csv file.
-  	def self.api_call_and_send(ticker_string)
-  		api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker_string}&f=sd1t1l1gh"
+  # takes the ticker string, attaches it appropriately to the api url
+  # and returns a csv file.
+  def self.api_call_and_send(ticker_string)
+  	api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker_string}&f=sd1t1l1gh"
 		info = CSV.new(open(api_url))
-		currentprice = Array.new()
-		index=1
+    index=1
 		info.each do |row|
-			Stock.find(index)[:current_price] = row[3].to_f
-			puts "Fuck shit #{Stock.find(index)[:ticker]}: #{Stock.find(index)[:current_price].to_s}"
-			index=index+1
-		end
-  	end
+      s = Stock.find(index)
+      s[:current_price] = row[3]
+      s.save
+		  index += 1
+    end
+  end
 end
