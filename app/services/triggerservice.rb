@@ -27,3 +27,4 @@ class TrigerService < ActiveRecord::Base
 
 	def contacttrigger
 	end
+end
