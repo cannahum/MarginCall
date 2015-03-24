@@ -42,6 +42,7 @@ group :development, :test do
   gem 'puma'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'sucker_punch'
 end
 group :production do
   gem 'pg'
@@ -57,4 +58,4 @@ gem 'minitest-spec-rails'
 gem 'bootstrap-sass'
 
 gem 'rails_admin'
-gem 'sucker_punch'
+
