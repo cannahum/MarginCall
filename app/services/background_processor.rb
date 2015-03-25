@@ -1,5 +1,5 @@
-# class BackgroundProcessor
-# 	include SuckerPunch::Job
+class BackgroundProcessor
+	include SuckerPunch::Job
 
 	
 	def initialize
