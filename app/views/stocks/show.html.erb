@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @stock.ticker %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @stock.company_name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @stock.current_price %>
+</p>
+
+  <tbody>
+  	<strong>News for: </strong>
+  	<%= @stock.ticker %>.
+  	<BR> 
+    <% @rss.items.each do |item| %>
+      <tr>
+        <td><%= link_to "#{item.title}", item.link %></td>
+        <BR> 
+      </tr>
+    <% end %>
+  </tbody>
+
+<p>
+  <b>Chart:</b>
+  <BR>
+  <%= image_tag "http://chart.finance.yahoo.com/z?s=#{@stock.ticker}&t=1d&q=l&l=on&z=s" %>
+</p>

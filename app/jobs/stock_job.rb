@@ -26,7 +26,7 @@ class StockJob
   def self.api_call_and_send(ticker_string)
   	api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker_string}&f=sd1t1l1gh"
 		info = CSV.new(open(api_url))
-    index=1
+    index=Stock.first[:id]
 		info.each do |row|
       s = Stock.find(index)
       s[:current_price] = row[3]
