@@ -28,6 +28,7 @@ class TriggersController < ApplicationController
   # POST /triggers.json
   def create
     @trigger = Trigger.new(trigger_params)
+    #add new stock here
     #checks if logged in and takes in form submittion to set a Trigger
     if logged_in?
       respond_to do |format|
