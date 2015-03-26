@@ -30,6 +30,8 @@ class StockJob
 		info.each do |row|
       s = Stock.find(index)
       s[:current_price] = row[3]
+      s[:daily_min_price] = row[4]
+      s[:daily_max_price] = row[5]
       s.save
 		  index += 1
     end
