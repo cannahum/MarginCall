@@ -1,8 +1,5 @@
 class ChangeStockTableField < ActiveRecord::Migration
-  def change
-  	change_table :stocks do |entry|
-  		entry.remove :trigger_price
-  		entry.decimal :current_price
+  	def change
+  		remove_column :stocks, :trigger_price
   	end
-  end
 end
