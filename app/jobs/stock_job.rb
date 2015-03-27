@@ -6,7 +6,10 @@ class StockJob
   def self.perform
     ActiveRecord::Base.connection_pool.with_connection do
     stock_string = construct_stock_string
-    api_call_and_send(stock_string)
+      if stock_string != nil
+        puts "the string is #{stock_string}"
+        api_call_and_send(stock_string)
+      end
     end
   end
 
