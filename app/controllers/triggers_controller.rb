@@ -28,6 +28,7 @@ class TriggersController < ApplicationController
   # POST /triggers.json
   def create
     @trigger = Trigger.new(trigger_params)
+    #add new stock here
     #checks if logged in and takes in form submittion to set a Trigger
     if logged_in?
       respond_to do |format|
@@ -68,7 +69,7 @@ class TriggersController < ApplicationController
   def destroy
     @trigger.destroy
     respond_to do |format|
-      format.html { redirect_to triggers_url, notice: 'Trigger was successfully destroyed.' }
+      format.html { redirect_to user_path(current_user), notice: 'Trigger was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
