@@ -35,6 +35,7 @@ class TriggersController < ApplicationController
         if @trigger.save
           @trigger.userEmail = current_user.email1
           @trigger.save
+          unique_stock @trigger.ticker
           format.html { redirect_to @trigger, notice: 'Trigger was successfully created.' }
           format.json { render :show, status: :created, location: @trigger }         
         else
