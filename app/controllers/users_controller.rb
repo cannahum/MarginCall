@@ -4,7 +4,7 @@ require 'pry-byebug'
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update,]
   before_action :correct_user, only: [:edit,:update]
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: [:index,:destroy]
 
   # GET /users
   # GET /users.json
@@ -93,6 +93,10 @@ class UsersController < ApplicationController
       redirect_to homepage_url, notice: 'User is not the correct user' unless current_user?(@user)
     end
     def admin_user
-      redirect_to homepage_url, notice: 'Only Admins may do that' unless current_user.admin?
+      if logged_in?
+        redirect_to homepage_url, notice: 'Only Admins may do that' unless current_user.admin?
+      else
+        redirect_to homepage_url, notice: 'Only Admins may do that' 
+      end
     end
 end
