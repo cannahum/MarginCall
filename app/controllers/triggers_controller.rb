@@ -2,6 +2,7 @@ require 'pry'
 require 'pry-byebug'
 
 class TriggersController < ApplicationController
+  require 'trigger_service'
   before_action :set_trigger, only: [:show, :edit, :update, :destroy]
 
   # GET /triggers
@@ -35,7 +36,7 @@ class TriggersController < ApplicationController
         if @trigger.save
           @trigger.userEmail = current_user.email1
           @trigger.save
-          unique_stock @trigger.ticker
+          TriggerService.unique_stock @trigger.ticker
           format.html { redirect_to @trigger, notice: 'Trigger was successfully created.' }
           format.json { render :show, status: :created, location: @trigger }         
         else
