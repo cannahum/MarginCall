@@ -4,6 +4,9 @@ require 'pry-byebug'
 class TriggersController < ApplicationController
   require 'trigger_service'
   before_action :set_trigger, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:show]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:index, :destroy]
 
   # GET /triggers
   # GET /triggers.json
@@ -85,4 +88,5 @@ class TriggersController < ApplicationController
     def trigger_params
       params.require(:trigger).permit(:userEmail, :ticker, :trigger_price)
     end
+
 end
