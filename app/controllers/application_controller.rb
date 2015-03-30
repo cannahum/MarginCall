@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       redirect_to homepage_url, notice: 'User is not the correct user' unless current_user?(@user)
     end
     def admin_user
-      redirect_to homepage_url, notice: 'Only Admins may do that' unless current_user.admin?
+      redirect_to homepage_url, notice: 'Only Admins may do that' unless admin?
     end
 
 	
