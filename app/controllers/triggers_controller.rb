@@ -4,8 +4,7 @@ require 'pry-byebug'
 class TriggersController < ApplicationController
   require 'trigger_service'
   before_action :set_trigger, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:show]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:show, :edit, :update]
   before_action :admin_user, only: [:index, :destroy]
 
   # GET /triggers
