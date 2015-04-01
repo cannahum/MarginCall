@@ -1,3 +1,3 @@
-e = BackgroundProcessor.new
+# e = BackgroundProcessor.new
 
-e.perform
+# e.perform
