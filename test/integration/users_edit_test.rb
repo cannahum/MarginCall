@@ -39,5 +39,12 @@ class UsersEditTest <ActionDispatch::IntegrationTest
 		assert_equal @user.email1, email
 	end
 
+	test "user must be signed in to edit user" do
+		get edit_user_path(@user)
+		assert_redirected_to login_path
+	end
+
+	test "logged out user cannot view users" do
+	end
 
 end
