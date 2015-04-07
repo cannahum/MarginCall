@@ -11,8 +11,13 @@ class ApplicationController < ActionController::Base
       end
     end
     def correct_user
-      @user = User.find(params[:id])
-      redirect_to homepage_url, notice: 'User is not the correct user' unless current_user?(@user)
+      # id_to_check = params[:id].to_integer
+      if User.count <= params[:id].to_i
+        @user = User.find(params[:id])
+        redirect_to homepage_url, notice: 'User is not the correct user' unless current_user?(@user)
+      else
+        redirect_to homepage_url, notice: 'User does not exist'
+      end
     end
     def admin_user
       redirect_to homepage_url, notice: 'Only Admins may do that' unless admin?

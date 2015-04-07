@@ -15,7 +15,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    database_size = User.count
+    if params[:id].to_i <= database_size
+      @user = User.find(params[:id])
+    else
+      redirect_to homepage_url, notice: "User does not exist"
+    end
   end
 
   # GET /users/new

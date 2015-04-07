@@ -4,8 +4,9 @@ michael:
   name: Michael Example
   password_digest: <%= User.digest('password') %>
   email1: michael@email.com
-  email2: MyString
+  email2: MyString@email.com
   p_number: MyString
+  admin: True
 
 susannah:
   name: Susannah Example
@@ -13,3 +14,4 @@ susannah:
   email1: susannah@email.com
   email2:
   p_number: MyString
+  admin: false
