@@ -1,0 +1,21 @@
+<% rss_tickers = ""%>
+<% Trigger.all.each do |trigger| %>
+	<% if trigger.userEmail == @user.email1%>
+		<% rss_tickers += trigger.ticker + ","%>
+	<% end %>
+	<% rss_tickers = rss_tickers.chomp %>
+<% end %>
+<% @rss = RssJob.getrss(rss_tickers) %>
+<!-- <% @rss.items = @rss.items[0..20]%> -->
+
+ <tbody>
+  	<strong>News for your stocks</strong>
+  	
+  	<BR> 
+    <% @rss.items.each do |item| %>
+      <tr>
+        <td><%= link_to "#{item.title}", item.link %></td>
+        <BR> 
+      </tr>
+    <% end %>
+  </tbody>
