@@ -2,7 +2,7 @@
 	<!-- Table of user's triggers -->
 	<div class="panel-heading">Triggers for <%=@user.name%></div>
 	<div class="panel-body">
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Ticker</th>
@@ -14,7 +14,8 @@
 		<tbody>
 			 <% Trigger.all.each do |trigger| %>
 			 <% if trigger.userEmail == @user.email1%>
-			 	<tr>
+			 	<% stock = Stock.find_by(ticker: trigger.ticker)%>
+			 	<tr data-link="<%= stock_path(stock)%>">
 			 		<td><%= trigger.ticker %></td>
 	                <td><%= trigger.trigger_price %></td>
 	                <td><%= Stock.find_by(ticker: trigger.ticker).current_price%></td>
