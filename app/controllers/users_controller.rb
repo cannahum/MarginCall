@@ -44,6 +44,7 @@ class UsersController < ApplicationController
         flash[:success] = "Welcome to MarginCall"
         format.html { redirect_to homepage_url, notice: "User #{@user.name} was successfully created." }
         format.json { render :show, status: :created, location: @user }
+        UserMailer.welcome_email(@user).deliver_now
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

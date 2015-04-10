@@ -11,10 +11,12 @@ class TriggerJob
 
 			if stock[:daily_min_price] < t_price && t_price < stock[daily_max_price]
 				puts "trigger that shit!"
+                UserMailer.trigger_email(user, trigger).deliver_now
 			else
 				difference = (t_price - stock[:current_price]).abs / stock[:current_price]
 				if difference < 0.01
 					puts "within 1% range"
+                    UserMailer.trigger_email(user, trigger).deliver_now
 				end
 			end
 		end
