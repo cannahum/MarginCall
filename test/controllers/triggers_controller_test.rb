@@ -48,8 +48,8 @@ class TriggersControllerTest < ActionController::TestCase
   #    delete :destroy, id: @trigger
    # end
 
-    assert_redirected_to triggers_path
-  end
+  #  assert_redirected_to triggers_path
+  #end
   
   test "should redirect to login if not logged in" do
     logout
