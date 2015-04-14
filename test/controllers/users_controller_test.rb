@@ -36,6 +36,6 @@ class UsersControllerTest < ActionController::TestCase
   #    delete :destroy, id: @user
   #  end
 
-    assert_redirected_to homepage_url
-  end
+  #  assert_redirected_to homepage_url
+  #end
 end
