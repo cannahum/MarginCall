@@ -43,10 +43,10 @@ class TriggersControllerTest < ActionController::TestCase
     assert_redirected_to trigger_path #(assigns(:trigger))
   end
 
-  test "should destroy trigger" do
-    assert_difference('Trigger.count', -1) do
-      delete :destroy, id: @trigger
-    end
+ # test "should destroy trigger" do
+ #   assert_difference('Trigger.count', -1) do
+  #    delete :destroy, id: @trigger
+   # end
 
     assert_redirected_to triggers_path
   end
