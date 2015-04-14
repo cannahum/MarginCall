@@ -50,6 +50,7 @@ class TriggersControllerTest < ActionController::TestCase
 
   #  assert_redirected_to triggers_path
   #end
+  #
   
   test "should redirect to login if not logged in" do
     logout
