@@ -28,30 +28,31 @@ class StockJob
   # and returns a csv file.
   def self.api_call_and_send(ticker_string)
 
-#   retrieval = "sd1t1l1ghydm6m8j6k5ver2"
-    #in order: s:symbol, d1:Last Trade Date, t1: Last Trade Time:, l1: last trade price, g: day's low, h: day's high, y: dividend yield, d: dividend per share, m6: Percent Change From 200 Day Moving Average, m8: Percent Change From 50 Day Moving Average, j6: Percent Change From 52 week Low, k5: Percent Change From 52 week High, v: Volume, e: Earnings per Share, r2: P/E Ratio
+    retrieval = "sd1t1l1ghydm6m8j6k5ver2"
+    ### EXPLANATION: ###
+    #in order: s:symbol, d1:Last Trade Date, t1: Last Trade Time:, 
+    #l1: last trade price, g: day's low, h: day's high, y: dividend yield, 
+    #d: dividend per share, m6: Percent Change From 200 Day Moving Average, 
+    #m8: Percent Change From 50 Day Moving Average, j6: Percent Change From 52 week Low, 
+    #k5: Percent Change From 52 week High, v: Volume, e: Earnings per Share, r2: P/E Ratio
 
-#api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker_string}&f=#{retrieval}"
-
-
-  	api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker_string}&f=sd1t1l1gh"
-		info = CSV.new(open(api_url))
+    api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker_string}&f=#{retrieval}"
+    info = CSV.new(open(api_url))
     index=Stock.first[:id]
 		info.each do |row|
       s = Stock.find(index)
       s[:current_price] = row[3]
       s[:daily_min_price] = row[4]
       s[:daily_max_price] = row[5]
-      
-      #s[:dividend_yield] = row[6]
-      #s[:dividend_per_share] = row[7]
-      #s[:percentchange_from200day_avg] = row[8]
-      #s[:percentchange_from50day_avg] = row[9]
-      #s[:percentchange_from52week_low] = row[10]
-      #s[:percentchange_from52week_high] = row[11]
-      #s[:volume] = row[12]
-      #s[:earnings_per_share] = row[13]
-      #s[:PE_ratio] = row[14]
+      s[:dividend_yield] = row[6]
+      s[:dividend_per_share] = row[7]
+      s[:percentchange_from200day_avg] = row[8]
+      s[:percentchange_from50day_avg] = row[9]
+      s[:percentchange_from52week_low] = row[10]
+      s[:percentchange_from52week_high] = row[11]
+      s[:volume] = row[12]
+      s[:eps] = row[13]
+      s[:pe_ratio] = row[14]
       
       s.save
 		  index += 1
