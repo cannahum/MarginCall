@@ -13,12 +13,12 @@
 
 
 Trigger.delete_all
-Trigger.create(userEmail:"cannahum@outlook.com", ticker:"AAPL", trigger_price:100.00)
-Trigger.create(userEmail:"cannahum@outlook.com", ticker:"MSFT", trigger_price:50.00)
-Trigger.create(userEmail:"cannahum@outlook.com", ticker:"GE", trigger_price:70.00)
+#Trigger.create(userEmail:"cannahum@outlook.com", ticker:"AAPL", trigger_price:100.00)
+#Trigger.create(userEmail:"cannahum@outlook.com", ticker:"MSFT", trigger_price:50.00)
+#Trigger.create(userEmail:"cannahum@outlook.com", ticker:"GE", trigger_price:70.00)
 
 
 Stock.delete_all
-Stock.create(ticker:'AAPL', current_price: 0)
-Stock.create(ticker:'MSFT', current_price: 0)
-Stock.create(ticker:'GE', current_price: 0)
+#Stock.create(ticker:'AAPL', current_price: 0)
+#Stock.create(ticker:'MSFT', current_price: 0)
+#Stock.create(ticker:'GE', current_price: 0)
