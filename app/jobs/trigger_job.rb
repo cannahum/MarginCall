@@ -5,65 +5,27 @@ class TriggerJob
 	def self.perform
 		@triggers = Trigger.all
 		@triggers.each do |trigger|
-			t_price = trigger[:trigger_price]
-            stock = Stock.find_by ticker: (trigger[:ticker])
-            user = User.find_by email1: (trigger[:userEmail])
-
-    if stock[:daily_min_price] < t_price && t_price < stock[:daily_max_price]
-				puts "trigger that shit!"
-                UserMailer.trigger_email(user, trigger).deliver_now
-			else
-				difference = (t_price - stock[:current_price]).abs / stock[:current_price]
-				if difference < 0.01
-					puts "within 1% range"
+            if trigger[:active]==true
+                t_value = trigger[:trigger_price]
+                stock = Stock.find_by ticker: (trigger[:ticker])
+                user = User.find_by email1: (trigger[:userEmail])
+                comparison = trigger[:comparison]
+                type = trigger[:triggertype]
+                c_value = TriggerJob.findvalue(stock, type)
+                activate = TriggerJob.evaluate(c_value, t_value, comparison)
+                
+                if activate ==true
                     UserMailer.trigger_email(user, trigger).deliver_now
-				end
-			end
+                    trigger[:active] = false;
+                    trigger.save
+                end
+    
+            end
+
+
 		end
 	end
 
-=begin
-
-    def self.perform
-        @triggers = Trigger.all
-        @triggers.each do |trigger|
-            
-            
-            
-            
-
-            #s[:current_price] = row[3]
-            #s[:daily_min_price] = row[4]
-            #s[:daily_max_price] = row[5]
-            
-            #s[:dividend_yield] = row[6]
-            #s[:dividend_per_share] = row[7]
-            #s[:percentchange_from200day_avg] = row[8]
-            #s[:percentchange_from50day_avg] = row[9]
-            #s[:percentchange_from52week_low] = row[10]
-            #s[:percentchange_from52week_high] = row[11]
-            #s[:volume] = row[12]
-            #s[:earnings_per_share] = row[13]
-            #s[:PE_ratio] = row[14]
-            
-            trigger_type = trigger[:type]#this is a string
-
-            stock = Stock.find_by ticker: (trigger[:ticker])
-            user = User.find(trigger[:user_id])
-            comparison = trigger[:comparison]
-            c_value = findvalue(stock, trigger_type)
-            t_value = trigger[trigger_price]
-            
-            triptrigger = evaluate(c_value, t_value, comparison)
-            
-            if triptrigger==true
-                puts "trigger that shit!"
-                UserMailer.trigger_email(user, trigger).deliver_now
-            end
-            
-        end
-    end
-        
 
 
     def self.findvalue(stock, type)
@@ -86,10 +48,10 @@ class TriggerJob
             value = stock[:percentchange_from52week_high]
         when "volume"
             value = stock[:volume]
-        when "earnings_per_share"
-            value = stock[:earnings_per_share]
-        when "PE_ratio"
-            value = stock[:PE_ratio]
+        when "eps"
+            value = stock[:eps]
+        when "pe_ratio"
+            value = stock[:pe_ratio]
         else
             puts "Big problem"
         end
@@ -98,7 +60,7 @@ class TriggerJob
 
     def self.evaluate(c_value, t_value, comparison)
 
-        bool trigger = false;
+        trigger = false;
         case comparison
         when "g"
             if c_value > t_value
@@ -115,9 +77,8 @@ class TriggerJob
         else
             puts "Big Problem"
         end
-
+        return trigger
     end
- 
-=end
+
 
 end

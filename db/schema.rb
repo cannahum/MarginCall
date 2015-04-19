@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415203012) do
+ActiveRecord::Schema.define(version: 20150416182523) do
 
   create_table "stocks", force: :cascade do |t|
     t.string   "ticker"
@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 20150415203012) do
     t.decimal  "trigger_price", precision: 8, scale: 2
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.string   "triggertype"
+    t.string   "comparison"
+    t.boolean  "active"
   end
 
   create_table "users", force: :cascade do |t|

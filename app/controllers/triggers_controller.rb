@@ -37,6 +37,9 @@ class TriggersController < ApplicationController
       respond_to do |format|
         if @trigger.save
           @trigger.userEmail = current_user.email1
+          @trigger.active = true
+          @trigger.triggertype = params.fetch(:triggertype)
+          @trigger.comparison = params.fetch(:comparison)
           @trigger.save
           TriggerService.unique_stock @trigger.ticker
           format.html { redirect_to @trigger, notice: 'Trigger was successfully created.' }
