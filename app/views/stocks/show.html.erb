@@ -1,34 +1,44 @@
-<p id="notice"><%= notice %></p>
+<div class = "row">
+  <p id="notice"><%= notice %></p>
+  <div class="col-md-8 col-offset-md-4">
+    <div class="center-block">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+              <%= @stock.company_name %>: <%= @stock.ticker %>
+        </div>
+        <div class="panel-body">
 
-<p>
-  <strong>Title:</strong>
-  <%= @stock.ticker %>
-</p>
+            <p>
+              <%= image_tag "http://chart.finance.yahoo.com/z?s=#{@stock.ticker}&t=1d&q=l&l=on&z=s" %>
+            </p>
+            <p>
+              <strong>Closing Price:</strong>
+              <%= @stock.current_price %>
+            </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @stock.company_name %>
-</p>
+            <p>
+            <strong> Daily Minimum </strong>
+            <!-- Please round the number -->
+           <!-- <%=@stock.daily_min_price %> -->
+            </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @stock.current_price %>
-</p>
-
-  <tbody>
-  	<strong>News for: </strong>
-  	<%= @stock.ticker %>.
-  	<BR> 
-    <% @rss.items.each do |item| %>
-      <tr>
-        <td><%= link_to "#{item.title}", item.link %></td>
-        <BR> 
-      </tr>
-    <% end %>
-  </tbody>
-
-<p>
-  <b>Chart:</b>
-  <BR>
-  <%= image_tag "http://chart.finance.yahoo.com/z?s=#{@stock.ticker}&t=1d&q=l&l=on&z=s" %>
-</p>
+              <tbody>
+                <strong>In The News </strong>
+                <%= @stock.ticker %>.
+                <BR> 
+                <% prev_title = ""%>
+                <% @rss.items.each do |item| %>
+                  <% if item.title != prev_title%>
+                  <tr>
+                    <td><%= link_to "#{item.title}", item.link %></td>
+                    <BR> 
+                  </tr>
+                    <% prev_title = item.title%>
+                  <%end%>
+                <% end %>
+              </tbody>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

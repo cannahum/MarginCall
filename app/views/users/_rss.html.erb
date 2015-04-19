@@ -5,35 +5,44 @@
 	<% end %>
 	<% rss_tickers = rss_tickers.chomp %>
 <% end %>
-<% if rss_tickers != "" %>
-  <% @rss = RssJob.getrss(rss_tickers) %>
-
-  <tbody>
-  	<strong>News for your stocks</strong>
-  	
-  	<BR> 
-    <% @rss.items.each do |item| %>
-      <tr>
-        <td><%= link_to "#{item.title}", item.link %></td>
-        <BR> 
-      </tr>
-    <% end %>
-  </tbody>
-
-<% else %>
-
-  <tbody>
-    <strong>Market News</strong>
-    <% @rss = RssJob.getrss("INDU") %>
-  
-    <BR> 
-    <% @rss.items.each do |item| %>
-      <tr>
-        <td><%= link_to "#{item.title}", item.link %></td>
-        <BR> 
-      </tr>
-    <% end %>
-  </tbody>
+<div class="panel panel-default"> 
 
 
-<% end %>
+        <% if rss_tickers != "" %>
+          <% @rss = RssJob.getrss(rss_tickers) %>
+
+          <div class="panel-heading">News for your stocks</div>
+          <div class="panel-body">
+          <tbody>
+          	<BR> 
+            <% prev_title = ""%>
+            <% @rss.items.each do |item| %>
+              <tr>
+                <% if item.title != prev_title %>
+                  <td><%= link_to "#{item.title}", item.link %></td>
+                  <% prev_title = item.title %>
+                <BR> 
+              </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+          <div>
+        <% else %>
+
+          <div class="panel panel-heading">Market News</div>
+          <div class="panel-body">
+          <tbody>
+            <% @rss = RssJob.getrss("INDU") %>
+          
+            <BR> 
+            <% @rss.items.each do |item| %>
+              <tr>
+                <td><%= link_to "#{item.title}", item.link %></td>
+                <BR> 
+              </tr>
+            <% end %>
+          </tbody>
+          </div>
+
+        <% end %>
+</div>
