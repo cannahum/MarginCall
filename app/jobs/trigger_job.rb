@@ -55,6 +55,8 @@ class TriggerJob
         else
             puts "Big problem"
         end
+        puts "This shit be called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        puts " THIS SHIT IS THE VALUE     #{value}     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         return value
     end
 

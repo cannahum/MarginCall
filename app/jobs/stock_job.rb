@@ -28,7 +28,7 @@ class StockJob
   # and returns a csv file.
   def self.api_call_and_send(ticker_string)
 
-    retrieval = "sd1t1l1ghydm6m8j6k5ver2"
+    retrieval = "sd1t1l1ghydm6m8j6k5ver"
     ### EXPLANATION: ###
     #in order: s:symbol, d1:Last Trade Date, t1: Last Trade Time:, 
     #l1: last trade price, g: day's low, h: day's high, y: dividend yield, 
