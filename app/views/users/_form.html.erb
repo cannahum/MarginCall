@@ -13,37 +13,37 @@
     </div>
   <% end %>
 
-  <fieldset>
-    <legend>Enter User Details</legend>
-  
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :email1 , 'Preferred Email:'%><br>
-    <%= f.text_field :email1 %>
-  </div>
-  <div class="field">
-    <%= f.label :email2 , 'Alternate Email:'%><br>
-    <%= f.text_field :email2 %>
-  </div>
-  <div class="field">
-    <%= f.label :p_number , 'Phone Number:'%><br>
-    <%= f.text_field :p_number %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  </fieldset>
+      <form>
+        <legend>Enter User Details</legend>
+      
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Full Name' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %><br>
+        <%= f.password_field :password, class: 'form-control',placeholder: 'Password' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email1 , 'Preferred Email:'%><br>
+        <%= f.text_field :email1, class: 'form-control', placeholder: 'Primary Email' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email2 , 'Alternate Email:'%><br>
+        <%= f.text_field :email2, class: 'form-control', placeholder: 'Secondary Email' %>
+      </div>
+      <div class="form-groupo">
+        <%= f.label :p_number , 'Phone Number:'%><br>
+        <%= f.text_field :p_number, class: 'form-control', placeholder: 'Phone Number' %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+      </form>
 <% end %>
 
 </div>
