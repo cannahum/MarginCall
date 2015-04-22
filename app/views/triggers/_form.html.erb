@@ -1,3 +1,12 @@
+<% content_for :head do %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+<script src='http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js'></script> 
+
+
+<% end %>
+
 <div class="container">
   <div class="row">
    <div class="col-md-12">
@@ -14,9 +23,61 @@
       </div>
     <% end %>
 
-    <div class="field">
+
+<body >
+<h>Enter Symbol Name </h>
+</br></br>
+<%=text_field_tag :txtTicker %>
+
+<script type="text/javascript">
+    var YAHOO = {
+        Finance: {
+            SymbolSuggest: {}
+        }
+    };
+              
+$("#txtTicker").autocomplete({
+source: function (request, response) {
+var query=request.term;  
+	$.ajax({
+              type: "GET",
+              url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
+              data: {query: query},
+              dataType: "jsonp",
+              jsonp : "callback",
+              jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+          });
+          // call back function
+          YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {           
+                var suggestions = [];
+                //alert(JSON.stringify(data.ResultSet.Result));                            
+                $.each(data.ResultSet.Result, function(i, val) {                                                                 
+                    suggestions.push("Name: " + val.name + " , Symbol: " + val.symbol+" , Exchange:"+val.exchDisp);
+                });
+               
+            response(suggestions);
+          															}
+},
+minLength: 1,
+select: function (event, ui) {
+              $("#txtTicker").val(ui.item.value.split("Symbol: ")[1].split(" ")[0].trim());
+              return false;
+},
+
+});
+</script>
+</body>
+
+
+<!--THIS BOX MUST BE DELETED, WE MUST FIX VALIDATION ON EMPTY TICKER FIELD-->
+
+<div class="field">
+
+    
      <%= f.label :ticker %><br>
-     <%= f.text_field :ticker %>
+     <%= f.text_field :ticker, id: "symbolinput" %>
+     
+
     </div>
 
     

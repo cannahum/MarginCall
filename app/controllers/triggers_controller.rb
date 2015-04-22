@@ -30,6 +30,7 @@ class TriggersController < ApplicationController
   # POST /triggers
   # POST /triggers.json
   def create
+      #WE MUST FIX THE TICKER CHECK BEING EMPTY
     @trigger = Trigger.new(trigger_params)
     #add new stock here
     #checks if logged in and takes in form submittion to set a Trigger
@@ -38,6 +39,9 @@ class TriggersController < ApplicationController
         if @trigger.save
           @trigger.userEmail = current_user.email1
           @trigger.active = true
+          @trigger.ticker = params.fetch(:txtTicker)
+          #puts "PARAMATERS ARE BEING PRINTED"
+          #puts params.inspect
           @trigger.triggertype = params.fetch(:triggertype)
           @trigger.comparison = params.fetch(:comparison)
           @trigger.save
