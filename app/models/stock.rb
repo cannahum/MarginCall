@@ -2,6 +2,8 @@ require 'open-uri'
 require 'csv'
 
 class Stock < ActiveRecord::Base
+	has_many :historical_stock_prices
+
 	validates :ticker, :current_price, presence: true
 	validates :current_price, numericality: true
 	validates :ticker, uniqueness: true
