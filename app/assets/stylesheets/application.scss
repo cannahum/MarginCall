@@ -22,3 +22,18 @@ $bgDefault      : #e74c3c;
 $bgHighlight    : #c0392b;
 $colDefault     : #ecf0f1;
 $colHover       : #ffbbbc; 
+// body {
+// 	background-image: url(image-path('Stock-Tracking-Index.jpg'));
+// }
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}

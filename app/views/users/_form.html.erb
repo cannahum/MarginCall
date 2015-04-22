@@ -14,7 +14,6 @@
   <% end %>
 
       <form>
-        <legend>Enter User Details</legend>
       
       <div class="form-group">
         <%= f.label :name %><br>
@@ -40,8 +39,8 @@
         <%= f.label :p_number , 'Phone Number:'%><br>
         <%= f.text_field :p_number, class: 'form-control', placeholder: 'Phone Number' %>
       </div>
-      <div class="actions">
-        <%= f.submit %>
+      <div class="actions" style="margin-top: 5px">
+        <%= f.submit 'Submit', :class => 'btn btn-default' %>
       </div>
       </form>
 <% end %>
