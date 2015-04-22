@@ -6,8 +6,9 @@
 		<thead>
 			<tr>
 				<th>Ticker</th>
-				<th>Trigger Price</th>
-				<th>Current Price</th>
+				<th>Trigger Type</th>
+				<th>Trigger Value</th>
+				<th>Current Value</th>
 				<th>Options</th>
 			</tr>
 		</thead>
@@ -17,8 +18,10 @@
 			 	<% stock = Stock.find_by(ticker: trigger.ticker)%>
 			 	<tr data-link="<%= stock_path(stock)%>">
 			 		<td><%= trigger.ticker %></td>
+			 		<td><%= trigger.triggertype%></td>
 	                <td><%= trigger.trigger_price %></td>
-	                <td><%= Stock.find_by(ticker: trigger.ticker).current_price%></td>
+	                <% stock = Stock.find_by(ticker: trigger.ticker)%>
+	                <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
 	                <td><%= link_to 'Show', trigger %>   <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			 	</tr>
 			 <%end%>

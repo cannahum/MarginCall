@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416182523) do
+ActiveRecord::Schema.define(version: 20150416184755) do
+
+  create_table "historical_stock_prices", force: :cascade do |t|
+    t.integer  "stock_id"
+    t.decimal  "price"
+    t.datetime "last_traded_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "stocks", force: :cascade do |t|
     t.string   "ticker"
@@ -23,15 +31,15 @@ ActiveRecord::Schema.define(version: 20150416182523) do
     t.decimal  "daily_max_price"
     t.decimal  "historical_price",                                      default: -0.0
     t.datetime "historical_time"
-    t.decimal  "dividend_yield"
-    t.decimal  "dividend_per_share"
-    t.decimal  "percentchange_from200day_avg"
-    t.decimal  "percentchange_from50day_avg"
-    t.decimal  "percentchange_from52week_low"
-    t.decimal  "percentchange_from52week_high"
-    t.decimal  "volume"
-    t.decimal  "eps"
-    t.decimal  "pe_ratio"
+    t.decimal  "dividend_yield",                precision: 8, scale: 2
+    t.decimal  "dividend_per_share",            precision: 8, scale: 2
+    t.decimal  "percentchange_from200day_avg",  precision: 8, scale: 2
+    t.decimal  "percentchange_from50day_avg",   precision: 8, scale: 2
+    t.decimal  "percentchange_from52week_low",  precision: 8, scale: 2
+    t.decimal  "percentchange_from52week_high", precision: 8, scale: 2
+    t.decimal  "volume",                        precision: 8, scale: 2
+    t.decimal  "eps",                           precision: 8, scale: 2
+    t.decimal  "pe_ratio",                      precision: 8, scale: 2
   end
 
   create_table "triggers", force: :cascade do |t|

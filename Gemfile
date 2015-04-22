@@ -60,3 +60,5 @@ gem 'bootstrap-sass'
 
 gem 'rails_admin'
 
+gem 'lazy_high_charts'
+

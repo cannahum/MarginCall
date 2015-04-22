@@ -28,7 +28,7 @@ class StockJob
   # and returns a csv file.
   def self.api_call_and_send(ticker_string)
 
-    retrieval = "sd1t1l1ghydm6m8j6k5ver2"
+    retrieval = "sd1t1l1ghydm6m8j6k5ver"
     ### EXPLANATION: ###
     #in order: s:symbol, d1:Last Trade Date, t1: Last Trade Time:, 
     #l1: last trade price, g: day's low, h: day's high, y: dividend yield, 
@@ -41,6 +41,7 @@ class StockJob
     index=Stock.first[:id]
 		info.each do |row|
       s = Stock.find(index)
+      HistoricalStockPrice.record_historical_price s, row[1], row[2]
       s[:current_price] = row[3]
       s[:daily_min_price] = row[4]
       s[:daily_max_price] = row[5]
