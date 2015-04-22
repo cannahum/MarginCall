@@ -25,12 +25,10 @@ ActiveRecord::Schema.define(version: 20150416184755) do
     t.string   "ticker"
     t.string   "company_name"
     t.decimal  "current_price",                 precision: 8, scale: 2
-    t.datetime "created_at",                                                           null: false
-    t.datetime "updated_at",                                                           null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.decimal  "daily_min_price"
     t.decimal  "daily_max_price"
-    t.decimal  "historical_price",                                      default: -0.0
-    t.datetime "historical_time"
     t.decimal  "dividend_yield",                precision: 8, scale: 2
     t.decimal  "dividend_per_share",            precision: 8, scale: 2
     t.decimal  "percentchange_from200day_avg",  precision: 8, scale: 2
