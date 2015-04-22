@@ -41,6 +41,7 @@ class StockJob
     index=Stock.first[:id]
 		info.each do |row|
       s = Stock.find(index)
+      HistoricalStockPrice.record_historical_price s, row[1], row[2]
       s[:current_price] = row[3]
       s[:daily_min_price] = row[4]
       s[:daily_max_price] = row[5]

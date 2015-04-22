@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stock: 
+  price: 9.99
+  lastTradedAt: 2015-04-16 14:47:55
+
+two:
+  stock: 
+  price: 9.99
+  lastTradedAt: 2015-04-16 14:47:55
