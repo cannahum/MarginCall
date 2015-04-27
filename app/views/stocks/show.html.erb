@@ -2,6 +2,7 @@
   <p id="notice"><%= notice %></p>
   <div class="col-md-8 col-offset-md-4">
     <div class="center-block">
+      
       <div class="panel panel-default">
         <div class="panel-heading">
               <%= @stock.company_name %>: <%= @stock.ticker %>
@@ -9,7 +10,8 @@
         <div class="panel-body">
 
             <p>
-              <%= image_tag "http://chart.finance.yahoo.com/z?s=#{@stock.ticker}&t=1d&q=l&l=on&z=s" %>
+              <%= high_chart("some_chart", @graph_data) %> 
+             
             </p>
             <p>
               <strong>Closing Price:</strong>

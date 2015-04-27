@@ -1,3 +1,6 @@
+require 'pry-byebug'
+
+
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
@@ -11,6 +14,9 @@ class StocksController < ApplicationController
   # GET /stocks/1.json
   def show
   		@rss = RssJob.getrss(@stock.ticker)
+      binding.pry
+      @stocks_presenter = StockPresenter.new(@stock.ticker, current_user)
+      @graph_data = @stocks_presenter.draw_graph
   end
 
   # GET /stocks/new
