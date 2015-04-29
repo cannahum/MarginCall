@@ -1,0 +1,40 @@
+<div class = "row">
+  <div class="col-md-8 col-offset-md-4">
+    <strong> Hello there </strong>
+
+    <script>
+      
+     //check if the element with id ticker exists or not
+      alert("rendering chart");
+        
+      $("#myticker").highcharts('StockChart', {
+
+        chart: {
+          height: 300,
+          width: 800
+        },
+
+        rangeSelector: {
+          selected: 1,
+          inputEnabled: $("#" + ticker).width() > 480
+        },
+
+        title: {
+          text: ticker + ' Stock Price'
+        },
+
+        series: [{
+          name: 'Price',
+          data: @graph_price,
+          tooltip: {
+            valueDecimals: 2
+          }
+        }]
+      });
+
+    </script>
+    <div id= "myticker"></div>
+    <strong> Hello there </strong>
+
+  </div>
+</div>

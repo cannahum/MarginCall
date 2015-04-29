@@ -9,10 +9,9 @@
         </div>
         <div class="panel-body">
 
-            <p>
-              <%= high_chart("some_chart", @graph_data) %> 
-             
-            </p>
+            <div>
+              <%= render 'chart' %>
+            </div>
             <p>
               <strong>Closing Price:</strong>
               <%= @stock.current_price %>

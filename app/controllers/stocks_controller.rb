@@ -14,9 +14,10 @@ class StocksController < ApplicationController
   # GET /stocks/1.json
   def show
   		@rss = RssJob.getrss(@stock.ticker)
-      binding.pry
+      #binding.pry
       @stocks_presenter = StockPresenter.new(@stock.ticker, current_user)
-      @graph_data = @stocks_presenter.draw_graph
+      @graph_time, @graph_price = @stocks_presenter.graph_data
+      @ticker = @stock.ticker
   end
 
   # GET /stocks/new
