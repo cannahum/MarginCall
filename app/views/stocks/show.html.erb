@@ -12,6 +12,8 @@
             <div>
               <%= render 'chart' %>
             </div>
+            
+          <div class="well">
             <p>
               <strong>Closing Price:</strong>
               <%= @stock.current_price %>
@@ -20,9 +22,10 @@
             <p>
             <strong> Daily Minimum </strong>
             <!-- Please round the number -->
-           <!-- <%=@stock.daily_min_price %> -->
+              <%=@stock.daily_min_price %> 
             </p>
 
+          </div>
               <tbody>
                 <strong>In The News </strong>
                 <%= @stock.ticker %>.
