@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  userEmail: MyString
-  ticker: MyString
+  userEmail: MyString@email.com
+  ticker: AAPL
   trigger_price: 9.99
 
 two:
-  userEmail: MyString
-  ticker: MyString
+  userEmail: MyString@email.com
+  ticker: GOOG
   trigger_price: 9.99

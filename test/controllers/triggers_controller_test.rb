@@ -7,13 +7,9 @@ class TriggersControllerTest < ActionController::TestCase
       ticker: 'AAPL',
       trigger_price: '98.05'
     }
+    setup
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:triggers)
-  end
 
   test "should get new" do
     get :new

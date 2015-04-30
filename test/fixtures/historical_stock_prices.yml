@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  stock: 
+  stock_id: AAPL
   price: 9.99
-  lastTradedAt: 2015-04-16 14:47:55
+  last_traded_at: 2015-04-16 14:47:55
 
 two:
-  stock: 
+  stock_id: GOOG
   price: 9.99
-  lastTradedAt: 2015-04-16 14:47:55
+  last_traded_at: 2015-04-16 14:47:55

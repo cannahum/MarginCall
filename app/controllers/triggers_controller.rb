@@ -93,6 +93,7 @@ class TriggersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # Fuck this method, depreciated
     def trigger_params
       params.require(:trigger).permit(:userEmail, :ticker, :trigger_price)
     end
