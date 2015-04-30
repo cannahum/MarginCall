@@ -5,32 +5,53 @@
     <script>
       
      //check if the element with id ticker exists or not
-      alert("rendering chart");
-        
-      $("#myticker").highcharts('StockChart', {
+      $(document).ready(function () {
+        $('#myticker').highcharts('StockChart', {
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: '<%= @ticker %> Stock Price'
+          },
 
-        chart: {
-          height: 300,
-          width: 800
-        },
+          rangeSelector: {
+            selected: 2
+          },
 
-        rangeSelector: {
-          selected: 1,
-          inputEnabled: $("#" + ticker).width() > 480
-        },
+          xAxis: {
+            type: 'datetime',
+            labels: {
+              formatter: function () {
+                return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
+              },
+          
+              dateTimeLabelFormats: {
+                    minute: '%H:%M',
+                    hour: '%H:%M',
+                    day: '%e. %b',
+                    week: '%e. %b',
+                    month: '%b \'%y',
+                    year: '%Y'
+              }
+            }
+          },
+          yAxis: {
+            type: 'double',
+            floor: 0,
+            plotLines: [{
+              value: 0,
+              width: 2,
+              color: 'silver'
+            }]
+          },
 
-        title: {
-          text: ticker + ' Stock Price'
-        },
-
-        series: [{
-          name: 'Price',
-          data: @graph_price,
-          tooltip: {
-            valueDecimals: 2
-          }
-        }]
+          series: [{
+              name: 'MyData1',
+              data: [<%= @graph_data %>]
+          }]
+        });
       });
+         
 
     </script>
     <div id= "myticker"></div>
