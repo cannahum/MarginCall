@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require highstock
+//= require highcharts/highcharts-more
 
 jQuery(function($) {
 	$("tr[data-link]").click(function() {
