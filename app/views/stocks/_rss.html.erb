@@ -1,0 +1,13 @@
+<tbody>
+  <strong><%= @stock.ticker %> In The News </strong> 
+  <% prev_title = ""%>
+  <% @rss.items.each do |item| %>
+    <% if item.title != prev_title%>
+      <tr>
+        <td><%= link_to "#{item.title}", item.link %></td>
+        <BR> 
+      </tr>
+      <% prev_title = item.title%>
+    <%end%>
+  <% end %>
+</tbody>
