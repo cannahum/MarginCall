@@ -19,6 +19,26 @@ Trigger.delete_all
 
 
 Stock.delete_all
-#Stock.create(ticker:'AAPL', current_price: 0)
+Stock.create(ticker:'AAPL', current_price: 110)
 #Stock.create(ticker:'MSFT', current_price: 0)
 #Stock.create(ticker:'GE', current_price: 0)
+
+HistoricalStockPrice.delete_all
+date = '05/01/2015'
+hour = '11'
+minute = '00';
+morning = 'am'
+
+(0..50).each do |iteration|
+	puts iteration
+	
+	HistoricalStockPrice.record_historical_price(Stock.first, date, hour + ':' + minute + morning)
+	Stock.first.update(:current_price => (Stock.first.current_price * 1.1))
+	
+	minute = ((minute.to_i) + 1)
+	if minute <= 9
+		minute = '0' + minute.to_s
+	else
+		minute = minute.to_s
+	end
+end

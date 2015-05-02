@@ -19,16 +19,12 @@ class StockPresenter
 		# stock data
 		@stock_data = HistoricalStockPrice.where(:stock_id => @stock_object.id).pluck(:last_traded_at, :price)
 		
-		@stock_data.each do |pair|
-			pair.map! do |time, price|
-				puts "time: #{time}, price: #{price}"
-				# time = time.to_time.utc.to_i
-	 		# 	price = price.to_f
-	 		# 	puts "time: #{time}, price: #{price}"
-			end
-		end
-		puts "stock data is:"
-		puts @stock_data
+		@stock_data.map! { |time, price| [time.to_i, price.to_f] }
+		
+		# puts "stock data is:"
+		# @stock_data.each do |time, price|
+		# 	puts "Time: #{time}, Price: #{price}"
+		# end
 
     	return @stock_data
   	end
