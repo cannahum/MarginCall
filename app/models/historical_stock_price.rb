@@ -11,7 +11,7 @@ require 'date'
 
 		puts "we got back from create_datetime and date and time are: #{p.last_traded_at}"
 
-		if p.last_traded_at != HistoricalStockPrice.maximum("last_traded_at")
+		if p.last_traded_at != HistoricalStockPrice.maximum("last_traded_at") && p.price > 0
 			p.save
 		end
 	end	
