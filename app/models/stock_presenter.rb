@@ -6,30 +6,36 @@ class StockPresenter
 
 	def initialize(ticker, user)
 		@stock_object = Stock.find_by(:ticker => ticker)
-    @stock_ticker = ticker
+    	@stock_ticker = ticker
 		@user = user
-  end
+  	end
 
 	# the high charts method
 	def graph_data
 
-		# users triggers for this particular stock
-		@user_triggers_for_this_stock = Trigger.where(:userEmail => @user.email1).where(:ticker => @stock_ticker)
-		
 		# stock data
 		@stock_data = HistoricalStockPrice.where(:stock_id => @stock_object.id).pluck(:last_traded_at, :price)
 		
-    @data= []
-  #   @time = []
-		# @price = []
+		@stock_data.map! { |time, price| [time.to_time.to_i * 1000, price.to_f] }
+		@stock_data.sort_by! { |time, price| time }
+		
+		# puts "stock data is:"
+		# @stock_data.each do |time, price|
+		# 	puts "Time: #{time}, Price: #{price}"
+		# end
 
-		@stock_data.map do |time, price| 
-		 	time = time.to_f
-		 end
+    	return @stock_data
+  	end
 
-    puts @stock_data
-
-    return @stock_data
-
-  end
+  	def triggers
+  		# users triggers for this particular stock
+		@user_triggers_for_this_stock = Trigger.where(:userEmail => @user.email1).where(:ticker => @stock_ticker).where(:triggertype => 'current_price')
+		
+		@triggers = Array.new
+		@user_triggers_for_this_stock.each do |t|
+			@triggers.push(t.trigger_price.to_f)
+		end
+		
+		return @triggers
+	end
 end

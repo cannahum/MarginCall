@@ -11,7 +11,7 @@ require 'date'
 
 		puts "we got back from create_datetime and date and time are: #{p.last_traded_at}"
 
-		if p.last_traded_at != HistoricalStockPrice.maximum("last_traded_at")
+		if p.last_traded_at != HistoricalStockPrice.maximum("last_traded_at") && p.price > 0
 			p.save
 		end
 	end	
@@ -26,7 +26,7 @@ require 'date'
 		morning = time[-2..1]
 		minute = time[-4..-3]
 		hour = time[0...time.rindex(":")]
-		unless morning == 'pm'
+		if morning == 'pm'
 			hour = hour.to_i + 12
 		end
 
