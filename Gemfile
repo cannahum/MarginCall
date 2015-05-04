@@ -46,8 +46,8 @@ group :development, :test do
 end
 
 group :production do
-  # gem 'pg'
-  # gem 'rails_12factor'
+   gem 'pg'
+   gem 'rails_12factor'
 end
 
 gem 'sucker_punch'
@@ -62,4 +62,5 @@ gem 'rails_admin'
 
 gem 'lazy_high_charts'
 gem 'highstock-rails'
+
 

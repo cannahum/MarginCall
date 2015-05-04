@@ -39,6 +39,7 @@ class TriggersControllerTest < ActionController::TestCase
   #   assert_redirected_to trigger_path #(assigns(:trigger))
   # end
 
+<<<<<<< HEAD
   # test "should destroy trigger" do
   #   assert_difference('Trigger.count', -1) do
   #     delete :destroy, id: @trigger
@@ -46,6 +47,16 @@ class TriggersControllerTest < ActionController::TestCase
 
   #   assert_redirected_to triggers_path
   # end
+=======
+ # test "should destroy trigger" do
+ #   assert_difference('Trigger.count', -1) do
+  #    delete :destroy, id: @trigger
+   # end
+
+  #  assert_redirected_to triggers_path
+  #end
+  #
+>>>>>>> 4a0d3bc65af650d8faec4f3109f7211587b39cf6
   
   # test "should redirect to login if not logged in" do
   #   logout
