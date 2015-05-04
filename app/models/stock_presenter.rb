@@ -30,7 +30,12 @@ class StockPresenter
   	def triggers
   		# users triggers for this particular stock
 		@user_triggers_for_this_stock = Trigger.where(:userEmail => @user.email1).where(:ticker => @stock_ticker).where(:triggertype => 'current_price')
-		puts @user_triggers_for_this_stock.count
-		return @user_triggers_for_this_stock
+		
+		@triggers = Array.new
+		@user_triggers_for_this_stock.each do |t|
+			@triggers.push(t.trigger_price.to_f)
+		end
+		
+		return @triggers
 	end
 end

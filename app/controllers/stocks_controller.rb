@@ -18,7 +18,6 @@ class StocksController < ApplicationController
       @stocks_presenter = StockPresenter.new(@stock.ticker, current_user)
       @stock_data = @stocks_presenter.graph_data.to_json.html_safe
       @triggers = @stocks_presenter.triggers
-      puts @triggers
       @ticker = @stock.ticker
   end
 

@@ -33,7 +33,7 @@ morning = 'am'
 	puts iteration
 	
 	HistoricalStockPrice.record_historical_price(Stock.first, date, hour + ':' + minute + morning)
-	Stock.first.update(:current_price => (Stock.first.current_price * 1.1))
+	Stock.first.update(:current_price => (Stock.first.current_price * 1.01))
 	
 	minute = ((minute.to_i) + 1)
 	if minute <= 9

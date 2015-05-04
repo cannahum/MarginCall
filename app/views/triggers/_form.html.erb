@@ -71,10 +71,10 @@
         <label>Type of Trigger</label>
         <%= select_tag(:triggertype, 
               options_for_select(
-              [['Dividend Yield', "dividend_yield"], 
-              ['Dividend Per Share', "dividend_per_share"],
+              [['Price', "current_price"],
+               ['Dividend Yield', "dividend_yield"], 
+               ['Dividend Per Share', "dividend_per_share"],
                ['PE Ratio', "pe_ratio"], 
-               ['Price', "current_price"],
                ['Percent Change From 200 Day Moving Avg', "percentchange_from200day_avg"],
                ['Percent Change From 50 Day Moving Avg', "percentchange_from50day_avg"],
                ['Percent Change From 52 Week Low', "percentchange_from52week_low"],
@@ -89,10 +89,10 @@
       <label>Evaluate By</label>
       <%= select_tag(:comparison, 
             options_for_select(
-            [['Greater Than', "g"], 
-            ['Less Than', "l"],
-             ['Equal To', "e"]
-            ]), class: "form-control") %>
+             [['Equal To', "e"],
+              ['Greater Than', "g"], 
+              ['Less Than', "l"]
+             ]), class: "form-control") %>
     </div>    
     
     <div class="form-group">
