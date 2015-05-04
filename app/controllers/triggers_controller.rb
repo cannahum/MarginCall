@@ -5,7 +5,7 @@ class TriggersController < ApplicationController
   require 'trigger_service'
   before_action :set_trigger, only: [:show, :edit, :update, :destroy]
   before_action :correct_trigger_user, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :destroy]
+  before_action :correct_trigger_user, only: [:index, :destroy]
 
   # GET /triggers
   # GET /triggers.json
@@ -66,7 +66,9 @@ class TriggersController < ApplicationController
   # PATCH/PUT /triggers/1.json
   def update
     respond_to do |format|
-      if @trigger.update(trigger_params)
+      temp_tick = params.fetch(:txtTicker)
+      temp_trigger_price = params.fetch(:trigger_price)
+      if @trigger.update(trigger_price: temp_trigger_price, ticker: temp_tick)
         format.html { redirect_to @trigger, notice: 'Trigger was successfully updated.' }
         format.json { render :show, status: :ok, location: @trigger }
       else
@@ -95,7 +97,7 @@ class TriggersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # Fuck this method, depreciated
     def trigger_params
-      params.require(:trigger).permit(:userEmail, :ticker, :trigger_price)
+      params.require(:trigger).permit(:userEmail, :txtTicker, :trigger_price)
     end
 
 end

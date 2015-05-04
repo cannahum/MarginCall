@@ -16,7 +16,9 @@ class StocksController < ApplicationController
   		@rss = RssJob.getrss(@stock.ticker)
       #binding.pry
       @stocks_presenter = StockPresenter.new(@stock.ticker, current_user)
-      @graph_data = @stocks_presenter.graph_data.to_json.html_safe
+      @stock_data = @stocks_presenter.graph_data.to_json.html_safe
+      @triggers = @stocks_presenter.triggers
+      puts @triggers
       @ticker = @stock.ticker
   end
 

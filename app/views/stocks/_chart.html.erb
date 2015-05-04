@@ -1,62 +1,33 @@
 <div class = "row">
   <div class="col-md-8 col-offset-md-4">
-    <strong> Hello there </strong>
 
     <script>
       
      //check if the element with id ticker exists or not
       $(document).ready(function () {
-        alert(new Date())
-        $('#myticker').highcharts('StockChart', {
-          chart: {
-              type: 'line'
-          },
-          title: {
-              text: '<%= @ticker %> Stock Price'
-          },
-
-          rangeSelector: {
-            selected: 2
-          },
-
-          xAxis: {
-            type: 'datetime',
-            labels: {
-              formatter: function () {
-                return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
-              },
+          $('#myticker').highcharts('StockChart', {
           
-              dateTimeLabelFormats: {
-                    minute: '%H:%M',
-                    hour: '%H:%M',
-                    day: '%e. %b',
-                    week: '%e. %b',
-                    month: '%b \'%y',
-                    year: '%Y'
-              }
-            }
-          },
-          yAxis: {
-            type: 'double',
-            floor: 0,
-            plotLines: [{
-              value: 0,
-              width: 2,
-              color: 'silver'
+            title: {
+              text: '<%= @ticker %> Stock Price'
+            },
+
+            yAxis: {
+              type: 'double',
+              floor: 0,
+              plotLines: [{
+                value: 0,
+                width: 2,
+                color: 'silver'
+              }]
+            },
+
+            series : [{
+                name :'<%= @ticker %>',
+                data : <%= @stock_data %>,
             }]
-          },
-
-          series: [{
-              name: 'MyData1',
-              data: <%= @graph_data %>
-          }]
-        });
+          });
       });
-         
-
     </script>
     <div id= "myticker"></div>
-    <strong> Hello there </strong>
-
   </div>
 </div>
