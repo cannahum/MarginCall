@@ -4,10 +4,11 @@
   <% prev_title = ""%>
   <% @rss.items.each do |item| %>
     <% if item.title != prev_title%>
-      <tr>
-        <td><%= link_to "#{item.title}", item.link %></td>
-        <BR> 
-      </tr>
+      <ul>
+      
+        <li><%= link_to "#{item.title}", item.link %></li>
+        
+      </ul>
       <% prev_title = item.title%>
     <%end%>
   <% end %>

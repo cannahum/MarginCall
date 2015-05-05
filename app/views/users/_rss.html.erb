@@ -17,12 +17,12 @@
           	<BR> 
             <% prev_title = ""%>
             <% @rss.items.each do |item| %>
-              <tr>
+              <ul>
                 <% if item.title != prev_title %>
-                  <td><%= link_to "#{item.title}", item.link %></td>
+                  <li><%= link_to "#{item.title}", item.link %></li>
                   <% prev_title = item.title %>
-                <BR> 
-              </tr>
+                 
+              </ul>
               <% end %>
             <% end %>
           </tbody>
