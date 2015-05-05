@@ -23,7 +23,7 @@
 
 	              <td><%= trigger.trigger_price %></td>
 	              <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
-	              <td><%= link_to 'Show', trigger %>   <%= link_to 'Edit', edit_trigger_path(curr_trigger: trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	              <td><%= link_to 'Show', trigger %>   <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			 	</tr>
 			  <%end%>
 			<%end%>
