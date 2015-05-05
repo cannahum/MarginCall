@@ -70,8 +70,8 @@ class TriggersController < ApplicationController
       temp_tick = params.fetch(:txtTicker)
       temp_trigger_price = params.fetch(:trigger_price)
       if @trigger.update(trigger_price: temp_trigger_price, ticker: temp_tick)
-        format.html { redirect_to @trigger, notice: 'Trigger was successfully updated.' }
-        format.json { render :show, status: :ok, location: @trigger }
+        format.html { redirect_to user_path(current_user), notice: 'Trigger was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @trigger }
       else
         format.html { render :edit }
         format.json { render json: @trigger.errors, status: :unprocessable_entity }
