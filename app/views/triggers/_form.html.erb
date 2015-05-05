@@ -26,7 +26,7 @@
 
 
 <%= f.label :ticker %>
-<%= text_field_tag :txtTicker %>
+<%= text_field_tag :txtTicker, @trigger.ticker %>
 
 <script type="text/javascript">
     var YAHOO = {
@@ -66,12 +66,34 @@
 
 
 
-    
+        <% trig_type=@trigger.triggertype %>
+        <% if trig_type=="current_price" %>
+              <% a='Price'%>
+            <% elsif trig_type=="dividend_yield" %>
+              <% a='Dividend Yield'%>
+            <% elsif trig_type=="dividend_per_share" %>
+              <% a='Dividend Per Share'%>
+            <% elsif trig_type=="percentchange_from200day_avg" %>
+              <% a= 'Percent Change From 200 Day Moving Avg'%>
+            <% elsif trig_type=="percentchange_from50day_avg" %>
+              <% a='Percent Change From 50 Day Moving Avg'%>
+            <% elsif trig_type=="percentchange_from52week_low" %>
+              <% a='Percent Change From 52 Week Low' %>
+            <% elsif trig_type=='percentchange_from52week_high' %>
+              <% a="Percent Change From 52 Week high"%>
+            <% elsif trig_type=="volume" %>
+              <% a='Volume'%>
+            <% elsif trig_type=="eps" %>
+              <% a='Earnings Per Share'%>
+            <% elsif trig_type=="pe_ratio" %>
+              <% a='PE Ratio'%>
+            <% end %></td>
         <div class="form-group">
         <label>Type of Trigger</label>
         <%= select_tag(:triggertype, 
               options_for_select(
-              [['Price', "current_price"],
+              [[a,trig_type],
+               ['Price', "current_price"],
                ['Dividend Yield', "dividend_yield"], 
                ['Dividend Per Share', "dividend_per_share"],
                ['PE Ratio', "pe_ratio"], 
@@ -81,7 +103,7 @@
                ['Percent Change From 52 Week high', "percentchange_from52week_high"],
                ['Volume', "volume"],
                ['Earnings Per Share', "eps"]
-              ]), class: "form-control") %>
+              ]), class: "form-control")%>
       </div>
 
 
@@ -97,7 +119,7 @@
     
     <div class="form-group">
      <label>Trigger Value</label>
-     <%= text_field_tag :trigger_price %>
+     <%= text_field_tag :trigger_price, @trigger.trigger_price %>
     </div>
     
     <div class="actions">
