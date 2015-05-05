@@ -18,10 +18,32 @@
 			  <% stock = Stock.find_by(ticker: trigger.ticker)%>
 			 	<tr>
 			 	  <td><%= link_to "#{stock.ticker}", stock_path(stock) %></td>
-			 	  <td><%= trigger.triggertype%></td>
+			 	  <td><%trig_type=trigger.triggertype%>
+			 	  	<% if trig_type=="current_price" %>
+			 	  		<%= "Price"%>
+			 	  	<% elsif trig_type=="dividend_yield" %>
+			 	  		<%= "Dividend Yield"%>
+			 	  	<% elsif trig_type=="dividend_per_share" %>
+			 	  		<%= "Dividend Per Share"%>
+			 	  	<% elsif trig_type=="percentchange_from200day_avg" %>
+			 	  		<%= "Percent Change From 200 Day Moving Avg"%>
+			 	  	<% elsif trig_type=="percentchange_from50day_avg" %>
+			 	  		<%= "Percent Change From 50 Day Moving Avg"%>
+			 	  	<% elsif trig_type=="percentchange_from52week_low" %>
+			 	  		<%="Percent Change From 52 Week Low" %>
+			 	  	<% elsif trig_type=="percentchange_from52week_high" %>
+			 	  		<%= "Percent Change From 52 Week high"%>
+			 	 		<% elsif trig_type=="volume" %>
+			 	  		<%= "Volume"%>
+			 	  	<% elsif trig_type=="eps" %>
+			 	  		<%= "Earnings Per Share"%>
+			 	  	<% elsif trig_type=="pe_ratio" %>
+			 	  		<%= "PE Ratio"%>
+			 	  	<% end %></td>
+
 	              <td><%= trigger.trigger_price %></td>
 	              <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
-	              <td><%= link_to 'Show', trigger %>   <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	              <td><%= link_to 'Show', trigger %>   <%= link_to 'Edit', edit_trigger_path(curr_trigger: trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			 	</tr>
 			  <%end%>
 			<%end%>
