@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :collections
+
   get 'admin' => 'admin#index'
     get 'login' => 'sessions#new'
     post 'login' => 'sessions#create'

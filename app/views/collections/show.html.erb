@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @collection.id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @collection.user_id %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @collection.stock_id %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @collection.quantity %>
+</p>
+
+<p>
+  <strong>Market cap:</strong>
+  <%= @collection.market_cap %>
+</p>
+
+<%= link_to 'Edit', edit_collection_path(@collection) %> |
+<%= link_to 'Back', collections_path %>
