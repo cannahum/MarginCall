@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150505025805) do
 
   create_table "collections", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "nickname"
     t.string   "stock_id"
     t.string   "quantity"
     t.string   "market_cap"
