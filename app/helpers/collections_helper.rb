@@ -16,6 +16,9 @@ module CollectionsHelper
 
 		stock_tickers.each do |t|
 			stock = Stock.find_by(:ticker => t)
+			if stock == nil
+				TriggerService.unique_stock t
+			end
 			stock_ids.push(stock.id)
 			current_prices.push(stock.current_price)
 		end
@@ -24,7 +27,8 @@ module CollectionsHelper
 
 		c.stock_id = stock_ids.to_s[1...-1]
 		c.quantity = quantities.to_s[1...-1]
-		c.market_cap = mc(current_prices, quantities)
+		c.total_value = mc(current_prices, quantities)
+		c.current_price = 100.0
 
 		return c
 	end
