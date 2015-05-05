@@ -19,8 +19,19 @@ ActiveRecord::Schema.define(version: 20150505025805) do
     t.string   "stock_id"
     t.string   "quantity"
     t.string   "market_cap"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.decimal  "daily_min_price",               precision: 8, scale: 2
+    t.decimal  "daily_max_price",               precision: 8, scale: 2
+    t.decimal  "dividend_yield",                precision: 8, scale: 2
+    t.decimal  "dividend_per_share",            precision: 8, scale: 2
+    t.decimal  "percentchange_from200day_avg",  precision: 8, scale: 2
+    t.decimal  "percentchange_from50day_avg",   precision: 8, scale: 2
+    t.decimal  "percentchange_from52week_low",  precision: 8, scale: 2
+    t.decimal  "percentchange_from52week_high", precision: 8, scale: 2
+    t.decimal  "volume",                        precision: 8, scale: 2
+    t.decimal  "eps",                           precision: 8, scale: 2
+    t.decimal  "pe_ratio",                      precision: 8, scale: 2
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   create_table "historical_stock_prices", force: :cascade do |t|

@@ -19,10 +19,7 @@ class TriggerJob
                     trigger[:active] = false;
                     trigger.save
                 end
-    
             end
-
-
 		end
 	end
 
