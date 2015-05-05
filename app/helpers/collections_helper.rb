@@ -20,6 +20,8 @@ module CollectionsHelper
 			current_prices.push(stock.current_price)
 		end
 
+		puts stock_ids
+
 		c.stock_id = stock_ids.to_s[1...-1]
 		c.quantity = quantities.to_s[1...-1]
 		c.market_cap = mc(current_prices, quantities)

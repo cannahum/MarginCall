@@ -8,6 +8,9 @@ class CollectionJob
  		@collection.each do |c|
  			stocks = c.stock_id.split(',')
  			weights = c.quantity.split(',')
+
+ 			stocks.map! { |s| s.to_i }
+ 			weights.map! { |w| w.to_f }
 			
 			price_array = Array.new
 			dividend_yield_array = Array.new
@@ -38,18 +41,18 @@ class CollectionJob
  
 			price, dividend_yield, dividend_per_share, percentchange_from200day_avg, percentchange_from50day_avg, percentchange_from52week_low, percentchange_from52week_high, volume, eps, pe_ratio = 0,0,0,0,0,0,0,0,0,0
  
-			i, size = 0, quantity.size
+			i, size = 0, weights.size
  			while i < size
- 				price += weight_array[i] * price_array[i]
- 				dividend_yield += weight_array[i] * dividend_yield_array[i]
- 				dividend_per_share += weight_array[i] * dividend_per_share_array[i]
- 				percentchange_from200day_avg += weight_array[i] * percentchange_from200day_avg[i]
-				percentchange_from50day_avg += weight_array[i] * percentchange_from50day_avg_array[i]
- 				percentchange_from52week_low += weight_array[i] * percentchange_from52week_low_array[i]
- 				percentchange_from52week_high += weight_array[i] * percentchange_from52week_high_array[i]
+ 				price += weights[i] * price_array[i]
+ 				dividend_yield += weights[i] * dividend_yield_array[i]
+ 				dividend_per_share += weights[i] * dividend_per_share_array[i]
+ 				percentchange_from200day_avg += weights[i] * percentchange_from200day_avg[i]
+				percentchange_from50day_avg += weights[i] * percentchange_from50day_avg_array[i]
+ 				percentchange_from52week_low += weights[i] * percentchange_from52week_low_array[i]
+ 				percentchange_from52week_high += weights[i] * percentchange_from52week_high_array[i]
  				volume += volume_array[i]
- 				eps += weight_array[i] * eps_array[i]
- 				pe_ratio += weight_array[i] * pe_ratio_array[i] 
+ 				eps += weights[i] * eps_array[i]
+ 				pe_ratio += weights[i] * pe_ratio_array[i] 
  				i += 1
 			end
  
