@@ -23,34 +23,42 @@
 
   <div class="container" id="wrapper">
   
-  
-    <% f.number_field :user_id, :value => session[:user_id] %>
+    <div class="form-horizontal">
+      
+      <label>Name of Collection</label>
+      <%= text_field_tag :nickname, nil ,:class => 'form-control' %>
+
+    </div>
     
-    <div class="fields">
+    <div class="form-inline">
+      <% %>
       <%= f.label :stock_id %>
-      <%= f.text_field :stock_id %>
+      <%= text_field_tag :ticker0, nil ,:class => 'form-control' %>
       <%= f.label :quantity %>
-      <%= f.text_field :quantity %>
+      <%= text_field_tag :quantity0, nil ,:class => 'form-control' %>
       <input class="btn btn-default" type="button" id="more_fields" onclick="add_fields();" value="Add Stock" />
     </div>
-    <div class="field">
-      <% f.text_field :market_cap %>
-    </div>
+    
 
     
   </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 
 <% end %>
 
 <script type="text/javascript">
- var vcount = 0;
+ var vcount = 1;
  function add_fields() {
-      document.getElementById('wrapper').innerHTML += '<div class = "fields"><label>Stock</label><input name="ticker'+ vcount + '"/><label>Quantity</label><input name="quantity' + vcount +'"/></div>';
+      document.createElement('DIV').innerHTML += '<div class = "form-inline"><label>Stock</label><input class = "form-control" name="ticker'+ vcount + '"/><label>Quantity</label><input class = "form-control" name="quantity' + vcount +'"/></div>';
       vcount++;
   }
+  function add_vcount(){
+    document.getElementById('wrapper').innerHTML += '<% hidden_field_tag :variable, :value =>' + vcount+ '%>'
+  }
+
 </script>
 
 <script type="text/javascript">

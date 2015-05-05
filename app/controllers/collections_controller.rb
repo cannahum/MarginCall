@@ -25,7 +25,17 @@ class CollectionsController < ApplicationController
   # POST /collections
   # POST /collections.json
   def create
-    @collection = Collection.new(collection_params)
+    ticker = ""
+    quantity = ""
+    params.each do |vn| 
+      name = eval(vn.to_s)
+      if name[0,5] == "ticker"
+        ticker << name + "+"
+      elsif name[0,7] == "quantity"
+        quantity << name + "+"
+      end 
+    end
+    @collection = Collection.new(user_id: session[:user_id], stock_id: ticker.chomp, quantity: quantity.chomp, nickname: params.fetch(:nickname) )
     @collection = reorganize_params(@collection)
 
     respond_to do |format|
@@ -72,6 +82,6 @@ class CollectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
-      params.require(:collection).permit(:id, :user_id, :stock_id, :quantity, :market_cap)
+      params.require(:collection).permit(:id, :user_id, :ticker0, :quantity0, :market_cap)
     end
 end
