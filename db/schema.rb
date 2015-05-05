@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 20150505025805) do
     t.string   "nickname"
     t.string   "stock_id"
     t.string   "quantity"
-    t.string   "market_cap"
+    t.decimal  "total_value"
+    t.decimal  "current_price"
     t.decimal  "daily_min_price",               precision: 8, scale: 2
     t.decimal  "daily_max_price",               precision: 8, scale: 2
     t.decimal  "dividend_yield",                precision: 8, scale: 2
