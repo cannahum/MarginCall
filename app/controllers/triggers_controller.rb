@@ -25,6 +25,7 @@ class TriggersController < ApplicationController
 
   # GET /triggers/1/edit
   def edit
+    @trigger = Trigger.find(params[:curr_trigger])
   end
 
   # POST /triggers
