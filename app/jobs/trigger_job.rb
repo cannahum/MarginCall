@@ -7,7 +7,10 @@ class TriggerJob
 		@triggers.each do |trigger|
             if trigger[:active]==true
                 t_value = trigger[:trigger_price]
-                stock = Stock.find_by ticker: (trigger[:ticker])
+                security = Stock.where(ticker: (trigger.ticker))
+                if security == nil
+                    security = Collections.where(nickname: (trigger.ticker))
+                end
                 user = User.find_by email1: (trigger[:userEmail])
                 comparison = trigger[:comparison]
                 type = trigger[:triggertype]
