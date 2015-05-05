@@ -64,35 +64,12 @@
   });
 </script>
 
-
-
-        <% trig_type=@trigger.triggertype %>
-        <% if trig_type=="current_price" %>
-              <% a='Price'%>
-            <% elsif trig_type=="dividend_yield" %>
-              <% a='Dividend Yield'%>
-            <% elsif trig_type=="dividend_per_share" %>
-              <% a='Dividend Per Share'%>
-            <% elsif trig_type=="percentchange_from200day_avg" %>
-              <% a= 'Percent Change From 200 Day Moving Avg'%>
-            <% elsif trig_type=="percentchange_from50day_avg" %>
-              <% a='Percent Change From 50 Day Moving Avg'%>
-            <% elsif trig_type=="percentchange_from52week_low" %>
-              <% a='Percent Change From 52 Week Low' %>
-            <% elsif trig_type=='percentchange_from52week_high' %>
-              <% a="Percent Change From 52 Week high"%>
-            <% elsif trig_type=="volume" %>
-              <% a='Volume'%>
-            <% elsif trig_type=="eps" %>
-              <% a='Earnings Per Share'%>
-            <% elsif trig_type=="pe_ratio" %>
-              <% a='PE Ratio'%>
-            <% end %></td>
+        <% a = sanitize_trigger_type(@trigger.triggertype)%>
         <div class="form-group">
         <label>Type of Trigger</label>
         <%= select_tag(:triggertype, 
               options_for_select(
-              [[a,trig_type],
+              [[a,@trigger.triggertype],
                ['Price', "current_price"],
                ['Dividend Yield', "dividend_yield"], 
                ['Dividend Per Share', "dividend_per_share"],
