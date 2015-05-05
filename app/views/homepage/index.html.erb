@@ -1,18 +1,43 @@
 <div class="row-center", style="margin-top:1em;">
 	<div class="col-centered">
-		<div class="jumbotron">
-			<h1>Welcome to MarginCall</h1>
-			<p>This is a cool web application for people who trade securities. If you want to know if an event occurs to a security of your choosing, we will give you a 'margin call'! </p>
-			
-			<%= link_to 'Sign Up', new_user_path, class: 'btn btn-primary btn-lg' %>    <%= link_to 'Login', login_path,class: 'btn btn-primary btn-lg' %>
-		</div>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		  <!-- Indicators -->
+		  <ol class="carousel-indicators">
+		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#myCarousel" data-slide-to="1"></li>
+		    <li data-target="#myCarousel" data-slide-to="2"></li>
+		  </ol>
+		  <div class="jumbotron">
+			<div class="carousel-inner" role="listbox">
+				<div  class="item active">
+					<h1>Welcome to MarginCall</h1>
+					<p>This is a cool web application for people who trade securities. If you want to know if an event occurs to a security of your choosing, we will give you a 'margin call'! </p>
+					
+					<%= link_to 'Sign Up', new_user_path, class: 'btn btn-primary btn-lg' %>    <%= link_to 'Login', login_path,class: 'btn btn-primary btn-lg' %>
+				</div>
+	  		<!-- Wrapper for slides -->
+		    <div  class="item">
+		     	<h3>Security Selection</h3>
+					<p>We partnered up with Yahoo! Finance in order to bring stocks, bonds, ETFs and mutual funds to you. You will need to specify the security your interested in via their <b>ticker</b> symbol. If you are unsure, please check <%= link_to 'YAHOO! FINANCE', "http://finance.yahoo.com" %> for the correct ticker </p>
+		   </div>
+
+	    <div  class="item">
+	      <h3>How Do We Contact You</h3>
+				<p>While you sign up, you will need to provide a valid email address. You can optionally provide an additional email address and a phone number if you wish to receive notifications there.</p>
+	    </div>
+	  </div>
+	  <!-- Left and right controls -->
+	  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
 	</div>
 </div>
+</div>
 
-<!-- Work in Progress Below -->
 
-<h3>Security Selection</h3>
-<p>We partnered up with Yahoo! Finance in order to bring stocks, bonds, ETFs and mutual funds to you. You will need to specify the security your interested in via their <b>ticker</b> symbol. If you are unsure, please check <%= link_to 'YAHOO! FINANCE', "http://finance.yahoo.com" %> for the correct ticker </p>
 
-<h3>How Do We Contact You</h3>
-<p>While you sign up, you will need to provide a valid email address. You can optionally provide an additional email address and a phone number if you wish to receive notifications there.</p>
