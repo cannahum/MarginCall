@@ -87,5 +87,15 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :password, :password_confirmation, :email1, :email2, :p_number)
     end
 
-    
+    def sanitize_trigger_type(trigger_type)
+      all_triggers = {"current_price": "Price", "dividend_yield": "Dividend Yield", "dividend_per_share": "Dividend Per Share" }
+    end
+  
+               # ['PE Ratio', "pe_ratio"], 
+               # ['Percent Change From 200 Day Moving Avg', "percentchange_from200day_avg"],
+               # ['Percent Change From 50 Day Moving Avg', "percentchange_from50day_avg"],
+               # ['Percent Change From 52 Week Low', "percentchange_from52week_low"],
+               # ['Percent Change From 52 Week high', "percentchange_from52week_high"],
+               # ['Volume', "volume"],
+               # ['Earnings Per Share', "eps"]
 end
