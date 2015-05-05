@@ -3,20 +3,20 @@
     <div class="col-md-4">
       <ul class="list-group">
         <li class="list-group-item">
-          <strong>Closing Price:</strong>
+          <strong>Current Price:</strong>
           <%= @stock.current_price %>
         </li>
         <li class="list-group-item">
           <strong> Daily Minimum </strong>
-          <%=@stock.daily_min_price %> 
+          <%=((@stock.daily_min_price*100).round).to_f/100%> 
         </li>
         <li class="list-group-item">
           <strong>Daily Maximum</strong>
-          <%= @stock.daily_max_price %>
+          <%= ((@stock.daily_max_price*100).round).to_f/100 %>
         </li>
         <li class="list-group-item">
           <strong>Volume Traded</strong>
-          <%= @stock.volume %>
+          <%= @stock.volume.to_i %>
         </li>
       </ul>
     </div>
@@ -44,7 +44,7 @@
       <ul class="list-group">
         <li class="list-group-item">
           <strong>50 Day Moving Average % Change</strong>
-          <%= @stock.percentchange_from50day_avg %>%
+          <%= ((@stock.percentchange_from50day_avg * 10000)).round.to_f/10000%>%
         </li>
         <li class="list-group-item">
           <strong>200 Day Moving Average % Change</strong>
