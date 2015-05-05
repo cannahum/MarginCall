@@ -18,7 +18,7 @@
 			  <% stock = Stock.find_by(ticker: trigger.ticker)%>
 			 	<tr>
 			 	  <td><%= link_to "#{stock.ticker}", stock_path(stock) %></td>
-			 	  <td><%= trigger.triggertype%></td>
+			 	  <td><%= sanitize_trigger_type(trigger.triggertype) %></td>
 	              <td><%= trigger.trigger_price %></td>
 	              <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
 	              <td><%= link_to 'Show', trigger %>   <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>

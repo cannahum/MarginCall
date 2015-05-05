@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update,]
   before_action :correct_user, only: [:show,:edit,:update]
   before_action :admin_user, only: [:index,:destroy]
+  helper_method :sanitize_trigger_type
 
   # GET /users
   # GET /users.json
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
     database_size = User.count
     if params[:id].to_i <= database_size
       @user = User.find(params[:id])
+
     else
       redirect_to homepage_url, notice: "User does not exist"
     end
@@ -88,14 +90,10 @@ class UsersController < ApplicationController
     end
 
     def sanitize_trigger_type(trigger_type)
-      all_triggers = {"current_price": "Price", "dividend_yield": "Dividend Yield", "dividend_per_share": "Dividend Per Share" }
+      all_triggers = {"current_price"=> "Price", "dividend_yield"=> "Dividend Yield", "dividend_per_share"=> "Dividend Per Share", "pe_ratio"=> "PE Ratio",
+      "percentchange_from200day_avg"=> 'Percent Change From 200 Day Moving Avg', "percentchange_from50day_avg"=> 'Percent Change From 50 Day Moving Avg',
+      "percentchange_from52week_low"=> 'Percent Change From 52 Week Low', "percentchange_from52week_high"=> 'Percent Change From 52 Week high',
+      "volume"=> "Volume", "eps"=> 'Earnings Per Share'}
+      return all_triggers[trigger_type]
     end
-  
-               # ['PE Ratio', "pe_ratio"], 
-               # ['Percent Change From 200 Day Moving Avg', "percentchange_from200day_avg"],
-               # ['Percent Change From 50 Day Moving Avg', "percentchange_from50day_avg"],
-               # ['Percent Change From 52 Week Low', "percentchange_from52week_low"],
-               # ['Percent Change From 52 Week high', "percentchange_from52week_high"],
-               # ['Volume', "volume"],
-               # ['Earnings Per Share', "eps"]
 end
