@@ -1,3 +1,13 @@
+<% content_for :head do %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+<script src='http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js'></script> 
+
+
+<% end %>
+
+
 <%= form_for(@collection) do |f| %>
   <% if @collection.errors.any? %>
     <div id="error_explanation">
@@ -11,27 +21,70 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :id %><br>
-    <%= f.number_field :id %>
+  <div class="container" id="wrapper">
+  
+  
+    <% f.number_field :user_id, :value => session[:user_id] %>
+    
+    <div class="fields">
+      <%= f.label :stock_id %>
+      <%= f.text_field :stock_id %>
+      <%= f.label :quantity %>
+      <%= f.text_field :quantity %>
+      <input class="btn btn-default" type="button" id="more_fields" onclick="add_fields();" value="Add Stock" />
+    </div>
+    <div class="field">
+      <% f.text_field :market_cap %>
+    </div>
+
+    
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :stock_id %><br>
-    <%= f.text_field :stock_id %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.text_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :market_cap %><br>
-    <%= f.text_field :market_cap %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+
 <% end %>
+
+<script type="text/javascript">
+ var vcount = 0;
+ function add_fields() {
+      document.getElementById('wrapper').innerHTML += '<div class = "fields"><label>Stock</label><input name="ticker'+ vcount + '"/><label>Quantity</label><input name="quantity' + vcount +'"/></div>';
+      vcount++;
+  }
+</script>
+
+<script type="text/javascript">
+    var YAHOO = {
+        Finance: {
+            SymbolSuggest: {}
+        }
+    };
+              
+  $("#txtTicker").autocomplete({
+    source: function (request, response) {
+      var query=request.term;  
+         $.ajax({
+              type: "GET",
+              url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
+              data: {query: query},
+              dataType: "jsonp",
+              jsonp : "callback",
+              jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+          });
+          // call back function
+          YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {           
+                var suggestions = [];
+                //alert(JSON.stringify(data.ResultSet.Result));                            
+                $.each(data.ResultSet.Result, function(i, val) {                                                                 
+                    suggestions.push("Name: " + val.name + " , Symbol: " + val.symbol+" , Exchange:"+val.exchDisp);
+                });   
+            response(suggestions);
+          }
+    },
+    minLength: 1,
+    select: function (event, ui) {
+              $("#txtTicker").val(ui.item.value.split("Symbol: ")[1].split(" ")[0].trim());
+              return false;
+    }
+  });
+</script>
