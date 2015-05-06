@@ -1,15 +1,19 @@
-<tbody>
-  <strong><%= @stock.ticker %> In The News </strong> 
-  </br>
-  <% prev_title = ""%>
-  <% @rss.items.each do |item| %>
-    <% if item.title != prev_title%>
-      <ul>
-      
-        <li><%= link_to "#{item.title}", item.link %></li>
-        
-      </ul>
-      <% prev_title = item.title%>
-    <%end%>
-  <% end %>
-</tbody>
+<div class="panel panel-default">
+  <div class="panel-heading"><%= @stock.ticker %> In The News </div>
+    <div class="panel-body">
+      <tbody>
+        <% prev_title = ""%>
+        <% @rss.items.each do |item| %>
+          <% if item.title != prev_title%>
+            <ul>
+            
+              <li><%= link_to "#{item.title}", item.link %></li>
+              
+            </ul>
+            <% prev_title = item.title%>
+          <%end%>
+        <% end %>
+      </tbody>
+    </div>
+
+</div>

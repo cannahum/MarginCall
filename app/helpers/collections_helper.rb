@@ -18,6 +18,7 @@ module CollectionsHelper
 			stock = Stock.find_by(:ticker => t)
 			if stock == nil
 				TriggerService.unique_stock t
+				stock = Stock.find_by(:ticker => t)
 			end
 			stock_ids.push(stock.id)
 			current_prices.push(stock.current_price)
