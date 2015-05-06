@@ -7,11 +7,15 @@ class TriggerJob
 		@triggers.each do |trigger|
             if trigger[:active]==true
                 t_value = trigger[:trigger_price]
-                stock = Stock.find_by ticker: (trigger[:ticker])
+                security = Stock.where(ticker: (trigger.ticker))[0]
+
+                if security == nil
+                    security = Collections.where(nickname: trigger.ticker)[0]
+                end
                 user = User.find_by email1: (trigger[:userEmail])
                 comparison = trigger[:comparison]
                 type = trigger[:triggertype]
-                c_value = TriggerJob.findvalue(stock, type)
+                c_value = TriggerJob.findvalue(security, type)
                 activate = TriggerJob.evaluate(c_value, t_value, comparison)
                 
                 if activate ==true
@@ -19,10 +23,7 @@ class TriggerJob
                     trigger[:active] = false;
                     trigger.save
                 end
-    
             end
-
-
 		end
 	end
 

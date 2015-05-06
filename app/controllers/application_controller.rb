@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 	helper_method :sanitize_trigger_type
   include SessionsHelper
 	include TriggersHelper
+  include CollectionsHelper
 
 
 	def logged_in_user

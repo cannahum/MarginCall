@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Stock:</strong>
+  <%= @collection.stock_id %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @collection.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_collection_path(@collection) %> |
+<%= link_to 'Back', collections_path %>

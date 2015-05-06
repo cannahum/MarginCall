@@ -61,6 +61,7 @@ class StockJob
   end
 
 
+
 # =begin
  
 #  def self.update_collections
@@ -136,6 +137,5 @@ class StockJob
 #  end
  
 #  =end
-
 
 end
