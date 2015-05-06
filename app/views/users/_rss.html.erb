@@ -13,8 +13,7 @@
 
           <div class="panel-heading">News for your stocks</div>
           <div class="panel-body">
-          <tbody>
-          	<BR> 
+          <tbody> 
             <% prev_title = ""%>
             <% @rss.items.each do |item| %>
               <ul>
@@ -33,12 +32,13 @@
           <div class="panel-body">
           <tbody>
             <% @rss = RssJob.getrss("INDU") %>
-          
-            <BR> 
+            <% prev_title = ""%>
             <% @rss.items.each do |item| %>
               <ul>
-                <li><%= link_to "#{item.title}", item.link %></li>
-                 
+                <% if item.title != prev_title %>
+                  <li><%= link_to "#{item.title}", item.link %></li>
+                  <% prev_title = item.title %>
+                 <% end %>
               </ul>
             <% end %>
           </tbody>
