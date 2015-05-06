@@ -107,6 +107,7 @@ class CollectionJob
 				c_in_stock_table[:volume] = volume
 				c_in_stock_table[:eps] = eps
 				c_in_stock_table[:pe_ratio] = pe_ratio
+				c_in_stock_table.save
 
 			end
 		end
