@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       if @user.save
         log_in @user
         flash[:success] = "Welcome to MarginCall"
-        format.html { redirect_to homepage_url, notice: "User #{@user.name} was successfully created." }
+        format.html { redirect_to user_path(@user), notice: "User #{@user.name} was successfully created." }
         format.json { render :show, status: :created, location: @user }
         UserMailer.welcome_email(@user).deliver_now
       else
