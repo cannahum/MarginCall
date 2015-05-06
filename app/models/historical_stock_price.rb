@@ -6,7 +6,7 @@ require 'date'
 	end	
 
 
-	def create_datetime(stock, date, time)
+	def self.create_datetime(stock, date, time)
 		date_array = date.split("/")
 		month = date_array[0]
 		day = date_array[1]
@@ -22,7 +22,7 @@ require 'date'
 		save_historical_price stock, DateTime.new(year.to_i, month.to_i, day.to_i, hour.to_i, minute.to_i)
 	end
 
-	def save_historical_price(stock, dt)
+	def self.save_historical_price(stock, dt)
 		p = HistoricalStockPrice.new
 
 		p.stock_id = stock.id
