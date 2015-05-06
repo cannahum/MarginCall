@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="well well-sm">
         <p>
         	<%= gravatar_for @user %>
@@ -12,7 +12,24 @@
           <strong>Email:</strong>
           <%= @user.email1 %>
         </p>
-
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        You Collections
+      </div>
+      <div class="panel-body">
+        <% u_collections = Collection.where(:user_id => current_user)%>
+        <div class="row">
+          <% u_collections.each do |collect|%>
+            <div class="col-xs-6 col-sm-4 col-md-2 pill">
+              <span style = "center-align"><%= collect.nickname %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>

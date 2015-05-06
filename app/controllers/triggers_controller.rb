@@ -21,6 +21,7 @@ class TriggersController < ApplicationController
   # GET /triggers/new
   def new
     @trigger = Trigger.new
+    @is_collection = params[:is_collection]
   end
 
   # GET /triggers/1/edit
@@ -32,7 +33,19 @@ class TriggersController < ApplicationController
   # POST /triggers.json
   def create
       #WE MUST FIX THE TICKER CHECK BEING EMPTY
-    temp_tick = params.fetch(:txtTicker)
+    @is_collection = params.fetch(:is_collection)
+    puts @is_collection
+    if @is_collection == "true"
+       puts @is_collection
+      col_nickname = params.fetch(:collectionName)
+      puts "#{current_user} IS THE USER!!!! #{col_nickname} IS THE COLLECTION"
+      col_name = "#{current_user.id}+#{col_nickname}" 
+      temp_tick = Stock.find_by(:ticker => col_name)
+      
+    else
+      puts @is_collection
+      temp_tick = params.fetch(:txtTicker)
+    end
     temp_trigger_price = params.fetch(:trigger_price)
     @trigger = Trigger.new(trigger_price: temp_trigger_price, ticker: temp_tick)
     #add new stock here
@@ -42,7 +55,13 @@ class TriggersController < ApplicationController
         if @trigger.save
           @trigger.userEmail = current_user.email1
           @trigger.active = true
-          @trigger.ticker = params.fetch(:txtTicker)
+          puts @is_collection 
+          if @is_collection == "true"
+            @trigger.ticker = temp_tick
+          else
+            puts @is_collection 
+            @trigger.ticker = params.fetch(:txtTicker)
+          end
           puts "PARAMATERS ARE BEING PRINTED"
           #puts params.inspect
           @trigger.triggertype = params.fetch(:triggertype)
@@ -110,8 +129,8 @@ class TriggersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     # Fuck this method, depreciated
-    def trigger_params
-      params.require(:trigger).permit(:userEmail, :txtTicker, :trigger_price)
-    end
+    # def trigger_params
+    #   params.require(:trigger).permit(:userEmail, :txtTicker, :trigger_price)
+    # end
 
 end

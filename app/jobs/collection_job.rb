@@ -19,6 +19,10 @@ class CollectionJob
 	 			weights = quantities.map { |w| w / total }
 				
 				price_array = Array.new
+				# necessary for stock representation of a collection
+				daily_min_array = Array.new
+				daily_max_array = Array.new
+				##
 				dividend_yield_array = Array.new
 				dividend_per_share_array = Array.new
 				percentchange_from200day_avg_array = Array.new
@@ -32,6 +36,8 @@ class CollectionJob
 	 			stocks.each do |i|
 	 				s = Stock.find(i)
 	 				price_array << s[:current_price].to_f
+	 				daily_min_array << s[:daily_min_price].to_f
+	 				daily_max_array << s[:daily_max_price].to_f
 	 				dividend_yield_array << s[:dividend_yield].to_f
 	 				dividend_per_share_array << s[:dividend_per_share].to_f
 	 				percentchange_from200day_avg_array << s[:percentchange_from200day_avg].to_f
@@ -46,11 +52,13 @@ class CollectionJob
 				#now we have an array for each element and a corresponding weighting array
 	 
 				new_total_value, dividend_yield, dividend_per_share, percentchange_from200day_avg, percentchange_from50day_avg, percentchange_from52week_low, percentchange_from52week_high, volume, eps, pe_ratio = 0,0,0,0,0,0,0,0,0,0
-	 
-				i, size = 0, weights.size
+	 			daily_max, daily_min = 0, 0
+	 			i, size = 0, weights.size
 
 	 			while i < size
 	 				new_total_value += quantities[i] * price_array[i]
+	 				daily_min += quantities[i] * daily_min_array[i]
+	 				daily_max += quantities[i] * daily_max_array[i]
 	 				dividend_yield += weights[i] * dividend_yield_array[i]
 	 				dividend_per_share += weights[i] * dividend_per_share_array[i]
 	 				percentchange_from200day_avg += weights[i] * percentchange_from200day_avg_array[i]
@@ -64,20 +72,8 @@ class CollectionJob
 				end
 	 
 				#now we have values we can store for this collection
-	 			sample_ticker = "#{c.user_id}+#{c.nickname}"
-	 			puts sample_ticker
-	 			puts "whassup"
-	 			Stock.all.each do |s|
-	 				puts s.ticker
-	 			end
-				c_in_stock_table = Stock.find_by(:ticker => sample_ticker)
-				
-
-				sample_stock_id = Stock.find(stocks.first).id
-				dt = HistoricalStockPrice.where(:stock_id => sample_stock_id).maximum("last_traded_at")
 	 			
-	 			HistoricalStockPrice.save_historical_price c_in_stock_table, dt
-				c[:total_value] = new_total_value
+	 			c[:total_value] = new_total_value
 				c[:current_price] = index_value * (1 + (new_total_value / total_value - 1))
 				c[:dividend_yield] = dividend_yield
 				c[:dividend_per_share] = dividend_per_share
@@ -90,6 +86,28 @@ class CollectionJob
 				c[:pe_ratio] = pe_ratio
 				 
 				c.save
+
+				sample_ticker = "#{c.user_id}+#{c.nickname}"
+	 			c_in_stock_table = Stock.find_by(:ticker => sample_ticker)
+				sample_stock_id = Stock.find(stocks.first).id
+				dt = HistoricalStockPrice.where(:stock_id => sample_stock_id).maximum("last_traded_at")
+	 			HistoricalStockPrice.save_historical_price c_in_stock_table, dt
+	 			puts daily_min
+				
+	 			c_in_stock_table[:current_price] = index_value * (1 + (new_total_value / total_value - 1))
+	 			c_in_stock_table[:daily_min_price] = daily_min
+	 			c_in_stock_table[:daily_max_price] = daily_max
+				c_in_stock_table[:dividend_yield] = dividend_yield
+				c_in_stock_table[:dividend_per_share] = dividend_per_share
+				c_in_stock_table[:percentchange_from200day_avg] = percentchange_from200day_avg
+				c_in_stock_table[:percentchange_from50day_avg] = percentchange_from50day_avg
+				c_in_stock_table[:percentchange_from52week_low] = percentchange_from52week_low
+				c_in_stock_table[:percentchange_from52week_high] = percentchange_from52week_high
+				c_in_stock_table[:volume] = volume
+				c_in_stock_table[:eps] = eps
+				c_in_stock_table[:pe_ratio] = pe_ratio
+				c_in_stock_table.save
+
 			end
 		end
 	end

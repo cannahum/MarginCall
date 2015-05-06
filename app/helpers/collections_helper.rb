@@ -17,6 +17,7 @@ module CollectionsHelper
 		stock_tickers.each do |t|
 			stock = Stock.find_by(:ticker => t)
 			if stock == nil
+				puts t
 				TriggerService.unique_stock t
 				stock = Stock.find_by(:ticker => t)
 			end
