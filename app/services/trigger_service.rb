@@ -3,7 +3,7 @@ module TriggerService
 	# the stock table. If it's not, as in if it's a new stock, then add it to
 	# the stock table, and call an api to get a name.
 	def self.unique_stock(ticker)
-		if Stock.where(ticker: ticker).size == 0
+		if Stock.where(ticker: ticker).size == 0 && Stock.find_by(ticker: ticker).collection == false
 			Stock.create(ticker: ticker, current_price: 0)
 			api_url = "http://download.finance.yahoo.com/d/quotes.csv?s=#{ticker}&f=nab"
 			info = CSV.new(open(api_url))
