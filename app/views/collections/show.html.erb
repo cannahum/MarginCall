@@ -1,16 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 
-<p>
-  <strong>Stock:</strong>
-  <%= @collection.stock_id %>
-</p>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @collection.quantity %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Your Personal Index <%= @collection.nickname %>
+  </div>
+  <div class="panel-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        	<%= render 'stocks' %>
+        </div>
 
-
+        <div class="col-md-12">
+        	<%= render 'rss' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--  <%= link_to 'Back', collections_path %>
  <%= link_to 'Edit', edit_collection_path(@collection) %> | -->

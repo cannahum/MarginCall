@@ -124,7 +124,26 @@ body:after {
 .well{
   opacity: .9;
 }
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 
+.pill {
+    color: #87cefa;
+    border: 1px #87cefa solid;
+    
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+}
+
+.pill:hover {
+    background-color: #87cefa;
+    color: white;
+}
+.pill span {
+    font-weight: bold;
+}
 // .jumbotron {
 //   background-image: image-url("Stock-Tracking-Index.jpg");
 //   background-position: 0% 25%;
