@@ -37,6 +37,7 @@
 		              <td><%= link_to "Deactivate", deactivate_path(foo: trigger)%>  <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				 	</tr>
 				<%end%>
+
 			</tbody>
 		</table>
 		</div>
@@ -44,6 +45,7 @@
 	<div class="panel-footer">	
 			<%= link_to 'Add Trigger', new_trigger_path, class: 'btn btn-default btn-xs' %>
 			<%= link_to 'Add New Collection', new_collection_path, class: 'btn btn-default btn-xs' %>
+			<%= link_to 'Add Trigger on Existing Collection', new_trigger_path(is_collection: true), class: 'btn btn-default btn-xs' %>
 	</div>
 </div>
 <div class ="panel panel-default">
@@ -82,6 +84,28 @@
 		Your Collections
 	</div>
 	<div class="panel-body">
-		
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Collection Name</th>
+					<th>Current Value</th>
+					<th>Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% passive_triggers.each do |trigger| %>
+				  <% stock = Collection.find_by(ticker: trigger.ticker)%>
+				 	<tr>
+				 	  <td><%= link_to "#{stock.ticker}", stock_path(stock) %></td>
+
+				 	  <td><%= sanitize_trigger_type(trigger.triggertype) %></td>
+
+		              <td><%= trigger.trigger_price %></td>
+		              <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
+		              <td><%= link_to "Reactivate", reactivate_path(foo: trigger)%>  <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				 	</tr>
+				<%end%>
+			</tbody>
+		</table>
 	</div>
 </div>
