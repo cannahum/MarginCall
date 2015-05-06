@@ -1,0 +1,14 @@
+<% tickers = @collection.stock_id.split(',')%>
+<% puts tickers.to_s + "!!!!!!!!!!!!!!!!!!!!"%>
+
+		
+<div class="row">
+	<% tickers.each do |t|%>
+		<% stock = Stock.find_by(:id =>t)%>
+		<% puts stock.ticker%>
+        <div class="col-xs-6 col-sm-4 col-md-2 pill">
+            <span><%= stock.ticker.upcase %></span> Insert weight here
+        </div>
+    <% end %>
+</div>
+
