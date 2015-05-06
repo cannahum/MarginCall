@@ -83,13 +83,13 @@ class TriggersController < ApplicationController
     curr_trigger=Trigger.find(params[:foo])
     curr_trigger.active=true
     curr_trigger.save
-    redirect_to user_path(current_user)
+    redirect_to :back
   end
   def deactivate 
     curr_trigger=Trigger.find(params[:foo])
     curr_trigger.active=false
     curr_trigger.save
-    redirect_to user_path(current_user)
+    redirect_to :back
   end
 
   # DELETE /triggers/1
