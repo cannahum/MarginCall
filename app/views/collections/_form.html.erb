@@ -1,0 +1,117 @@
+<% content_for :head do %>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+<script src='http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js'></script> 
+
+
+<% end %>
+
+
+<div class="row row-centered" style="margin-top: 5vh">
+  <div class="col-md-8 col-centered">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for(@collection) do |f| %>
+          <% if @collection.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@collection.errors.count, "error") %> prohibited this collection from being saved:</h2>
+
+              <ul>
+              <% @collection.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+            <div id="wrapper">
+              <div class="form-group">
+                <label>Name of Collection</label>
+                <%= text_field_tag :nickname, nil ,:class => 'form-control' %>
+              </div>
+              
+              <div class="form-group">
+                <label>Stock</label>
+                <input class="form-control" name="ticker0"/>
+               <!--  <%= text_field_tag :ticker0, nil ,:class => 'form-control' %> -->
+                <label>Quantity</label>
+                <input class="form-control" name="quantity0"/>
+        <!--         <%= text_field_tag :quantity0, nil ,:class => 'form-control' %> -->
+              </div>
+              <!-- New Rows are added here are essentially the same as above but without the button  -->
+            </div>
+
+            <div class="actions form-group">
+              <input class="btn btn-default" type="button" id="more_fields" onclick="add_fields();" value="Add Stock" />
+              <%= f.submit 'Submit', :class => 'btn btn-default btn-primary' %>
+            </div>
+        <% end %>    
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+<script type="text/javascript">
+ var vcount = 1;
+ var beforeDiv;
+ function add_fields() {
+      beforeDiv = document.getElementById('wrapper');
+      console.log("BEFORE BEFORE BEFORE" + beforeDiv);
+      var newDiv = document.createElement('DIV');
+      newDiv.innerHTML = '<div class = "form-group"><label>Stock</label><input class = "form-control" name="ticker'+ vcount + '"/><label>Quantity</label><input class = "form-control" name="quantity' + vcount +'"/></div>';
+      console.log("NEW NEW NEW NEW NEW"+newDiv.innerHTML);
+      var parentDiv = beforeDiv.parentNode;
+      console.log("PARENT PARENT PARENT" + parentDiv)
+      parentDiv.insertBefore(newDiv, lastSibling(beforeDiv));
+      vcount++;
+  }
+  function lastSibling(node){
+    var tempObj=node.parentNode.lastChild; 
+    while(tempObj.nodeType!=1 && tempObj.previousSibling!=null){  
+    tempObj=tempObj.previousSibling;   
+    }  
+    return (tempObj.nodeType==1)?tempObj:false; 
+  }
+  function add_vcount(){
+    document.getElementById('wrapper').innerHTML += '<% hidden_field_tag :variable, :value =>' + vcount+ '%>'
+  }
+
+
+</script>
+
+<script type="text/javascript">
+    var YAHOO = {
+        Finance: {
+            SymbolSuggest: {}
+        }
+    };
+              
+  $("#txtTicker").autocomplete({
+    source: function (request, response) {
+      var query=request.term;  
+         $.ajax({
+              type: "GET",
+              url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
+              data: {query: query},
+              dataType: "jsonp",
+              jsonp : "callback",
+              jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+          });
+          // call back function
+          YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {           
+                var suggestions = [];
+                //alert(JSON.stringify(data.ResultSet.Result));                            
+                $.each(data.ResultSet.Result, function(i, val) {                                                                 
+                    suggestions.push("Name: " + val.name + " , Symbol: " + val.symbol+" , Exchange:"+val.exchDisp);
+                });   
+            response(suggestions);
+          }
+    },
+    minLength: 1,
+    select: function (event, ui) {
+              $("#txtTicker").val(ui.item.value.split("Symbol: ")[1].split(" ")[0].trim());
+              return false;
+    }
+  });
+</script>

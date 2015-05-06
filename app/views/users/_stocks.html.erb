@@ -1,5 +1,18 @@
+
+<% active_triggers=[] %>
+<% passive_triggers=[] %>
+<% Trigger.all.each do |trigger| %>
+	<% if trigger.userEmail == @user.email1%>
+		<% if trigger.active %>
+			<% active_triggers.push(trigger) %>
+		<% else %>
+			<% passive_triggers.push(trigger) %>
+		<% end %>
+	<% end %>
+<% end %>
 <div class ="panel panel-default">
 	<!-- Table of user's triggers -->
+<<<<<<< HEAD
 	<div class="panel-heading">Triggers for <%=@user.name%></div>
 	<div class="panel-body">
 	<table class="table table-hover">
@@ -27,6 +40,70 @@
 			<%end%>
 		</tbody>
 	</table>
+=======
+	<div class="panel-heading">Active Triggers for <%=@user.name%></div>
+		<div class="panel-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Ticker</th>
+					<th>Trigger Type</th>
+					<th>Trigger Value</th>
+					<th>Current Value</th>
+					<th>Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% active_triggers.each do |trigger| %>
+				  <% stock = Stock.find_by(ticker: trigger.ticker)%>
+				 	<tr>
+				 	  <td><%= link_to "#{stock.ticker}", stock_path(stock) %></td>
+
+				 	  <td><%= sanitize_trigger_type(trigger.triggertype) %></td>
+
+		              <td><%= trigger.trigger_price %></td>
+		              <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
+		              <td><%= link_to "Deactivate", deactivate_path(foo: trigger)%>  <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				 	</tr>
+				<%end%>
+			</tbody>
+		</table>
+		</div>
+	            
+	<div class="panel-footer">	
+			<%= link_to 'Add Trigger', new_trigger_path, class: 'btn btn-default btn-xs' %>
+			<%= link_to 'Add New Collection', new_collection_path, class: 'btn btn-default btn-xs' %>
 	</div>
-	<div class="panel-footer"><%= link_to 'Add Trigger', new_trigger_path %></div>
+</div>
+<div class ="panel panel-default">
+	<!-- Table of user's triggers -->
+	<div class="panel-heading">Passive Triggers for <%=@user.name%></div>
+		<div class="panel-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Ticker</th>
+					<th>Trigger Type</th>
+					<th>Trigger Value</th>
+					<th>Current Value</th>
+					<th>Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% passive_triggers.each do |trigger| %>
+				  <% stock = Stock.find_by(ticker: trigger.ticker)%>
+				 	<tr>
+				 	  <td><%= link_to "#{stock.ticker}", stock_path(stock) %></td>
+
+				 	  <td><%= sanitize_trigger_type(trigger.triggertype) %></td>
+
+		              <td><%= trigger.trigger_price %></td>
+		              <td><%= TriggerJob.findvalue(stock,trigger.triggertype)%></td>
+		              <td><%= link_to "Reactivate", reactivate_path(foo: trigger)%>  <%= link_to 'Edit', edit_trigger_path(trigger) %>  <%= link_to 'Destroy', trigger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				 	</tr>
+				<%end%>
+			</tbody>
+		</table>
+>>>>>>> development
+	</div>
 </div>

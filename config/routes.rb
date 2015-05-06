@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :collections
+
   get 'admin' => 'admin#index'
     get 'login' => 'sessions#new'
     post 'login' => 'sessions#create'
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   resources :triggers
 
   resources :stocks
+  get 'reactivate' => 'triggers#reactivate'
+  get 'deactivate' => 'triggers#deactivate'
 
   root 'homepage#index', as: 'homepage'
   # The priority is based upon order of creation: first created -> highest priority.

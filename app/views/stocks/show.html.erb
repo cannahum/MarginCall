@@ -1,46 +1,26 @@
 <div class = "row">
   <p id="notice"><%= notice %></p>
-  <div class="col-md-8 col-offset-md-4">
+  <div class="col-md-12">
     <div class="center-block">
       
       <div class="panel panel-default">
         <div class="panel-heading">
-              <%= @stock.company_name %>: <%= @stock.ticker %>
+              <%= @stock.ticker %>: <%= @stock.company_name %>
         </div>
+
         <div class="panel-body">
 
+        
             <div>
               <%= render 'chart' %>
             </div>
             
-          <div class="well">
-            <p>
-              <strong>Closing Price:</strong>
-              <%= @stock.current_price %>
-            </p>
-
-            <p>
-            <strong> Daily Minimum </strong>
-            <!-- Please round the number -->
-              <%=@stock.daily_min_price %> 
-            </p>
-
-          </div>
-              <tbody>
-                <strong>In The News </strong>
-                <%= @stock.ticker %>.
-                <BR> 
-                <% prev_title = ""%>
-                <% @rss.items.each do |item| %>
-                  <% if item.title != prev_title%>
-                  <tr>
-                    <td><%= link_to "#{item.title}", item.link %></td>
-                    <BR> 
-                  </tr>
-                    <% prev_title = item.title%>
-                  <%end%>
-                <% end %>
-              </tbody>
+            <div>
+              <%= render 'stock_data' %>
+            </div>
+            <div>
+              <%= render 'rss' %>
+            </div>
         </div>
       </div>
     </div>

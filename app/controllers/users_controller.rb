@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update,]
   before_action :correct_user, only: [:show,:edit,:update]
   before_action :admin_user, only: [:index,:destroy]
+  
 
   # GET /users
   # GET /users.json
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
     database_size = User.count
     if params[:id].to_i <= database_size
       @user = User.find(params[:id])
+
     else
       redirect_to homepage_url, notice: "User does not exist"
     end

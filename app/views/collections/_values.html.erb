@@ -1,0 +1,64 @@
+<div class="well">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Current Price:</strong>
+          <%= @collection.current_price %>
+        </li>
+        <li class="list-group-item">
+          <strong> Daily Minimum </strong>
+          <%=((@collection.daily_min_price*100).round).to_f/100%> 
+        </li>
+        <li class="list-group-item">
+          <strong>Daily Maximum</strong>
+          <%= ((@collection.daily_max_price*100).round).to_f/100 %>
+        </li>
+        <li class="list-group-item">
+          <strong>Volume Traded</strong>
+          <%= @collection.volume.to_i %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <ul class="list-group"> 
+        <li class="list-group-item">
+          <strong>Dividend Yield</strong>
+          <%= @collection.dividend_yield %>
+        </li>
+        <li class="list-group-item">
+          <strong>Dividend Per Share</strong>
+          <%= @collection.dividend_per_share %>
+        </li>
+        <li class="list-group-item">
+          <strong>Earning Per Share</strong>
+          <%= @collection.eps%>
+        </li>
+        <li class="list-group-item">
+          <strong>P/E Ratio</strong>
+          <%= @collection.pe_ratio%>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>50 Day Moving Average % Change</strong>
+          <%= ((@collection.percentchange_from50day_avg * 10000)).round.to_f/10000%>%
+        </li>
+        <li class="list-group-item">
+          <strong>200 Day Moving Average % Change</strong>
+          <%= @collection.percentchange_from200day_avg %>%
+        </li>
+        <li class="list-group-item">
+          <strong>52 Week Low % Change</strong>
+          <%= @collection.percentchange_from52week_low%>%
+        </li>
+        <li class="list-group-item">
+          <strong>52 Week High % Change</strong>
+          <%= @collection.percentchange_from52week_high%>%
+        </li>
+      </ul>
+    </div>
+  </div>  
+</div>

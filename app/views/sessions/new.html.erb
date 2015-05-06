@@ -1,30 +1,33 @@
-<div class="margincall_form">
-	<%= form_for(:session, url: login_path) do |f| %>
-		<fieldset>
-			<% provide(:title, "Log In") %>
-			<legend>Please Log In</legend>
-			<div>
-				<%= f.label :email %>
-				<%= f.email_field :email1, class: 'form-control' %>
-			</div>
-			<div>
-				<%= f.label :password %>
-				<%= f.password_field :password, class: 'form-control' %>
-			</div>
-			<div>
-				<%= f.label :remember_me, class: "checkbox inline" do %>
-					<%=f.check_box :remember_me%>
-					<span>Remember me on this computer</span>
-				<% end %>
-			<div>
-				<%= f.submit "Log In", class: "btn btn-primary" %>
-			</div>
-		</fieldset>
-	<% end %>
-	<% if flash[:alert] %>
-		<p id="notice"><%= flash[:alert] %></p>
-	<% end %>
-	
-	<p>Not a User Yet? <%= link_to 'Sign Up', new_user_path %></p>
 
+	<div class="margincall_form">
+		<div class="jumbotron">
+		<%= form_for(:session, url: login_path) do |f| %>
+			<fieldset>
+				<% provide(:title, "Log In") %>
+				<legend>Please Log In</legend>
+				<div>
+					<%= f.label :email %>
+					<%= f.email_field :email1, class: 'form-control' %>
+				</div>
+				<div>
+					<%= f.label :password %>
+					<%= f.password_field :password, class: 'form-control' %>
+				</div>
+				<div>
+					<%= f.label :remember_me, class: "checkbox inline" do %>
+						<%=f.check_box :remember_me%>
+						<span>Remember me on this computer</span>
+					<% end %>
+				<div>
+					<%= f.submit "Log In", class: "btn btn-primary" %>
+				</div>
+			</fieldset>
+		<% end %>
+		<% if flash[:alert] %>
+			<p id="notice"><%= flash[:alert] %></p>
+		<% end %>
+		
+		<p>Not a User Yet? <%= link_to 'Sign Up', new_user_path %></p>
+
+	</div>
 </div>

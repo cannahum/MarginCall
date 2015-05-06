@@ -1,5 +1,5 @@
 <div class = "row">
-  <div class="col-md-8 col-offset-md-4">
+  <div class="col-md-12">
 
     <script>
       
@@ -12,13 +12,16 @@
             },
 
             yAxis: {
+              title: {
+                text: 'Price'
+              },
               type: 'double',
               floor: 0,
               plotLines: [{
                 value: 0,
                 width: 2,
                 color: 'silver'
-              }]
+              }], 
             },
 
             series : [{
@@ -26,7 +29,26 @@
                 data : <%= @stock_data %>,
             }]
           });
+
+          var chart = $('#myticker').highcharts(),
+              triggers = <%= @triggers %>;
+
+          for(i = 0; i < triggers.length; i++){
+            chart.yAxis[0].addPlotLine({
+              value : triggers[i],
+              color : 'red',
+              dashStyle : 'shortdash',
+              width : 2,
+              label: {
+                align: 'right',
+                text : 'Trigger: $' + triggers[i]
+
+              }
+              
+            })
+          }
       });
+
     </script>
     <div id= "myticker"></div>
   </div>

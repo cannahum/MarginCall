@@ -2,6 +2,7 @@ require 'pry-byebug'
 require 'json'
 
 class StocksController < ApplicationController
+  before_action :is_stock?
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
   # GET /stocks
@@ -18,7 +19,6 @@ class StocksController < ApplicationController
       @stocks_presenter = StockPresenter.new(@stock.ticker, current_user)
       @stock_data = @stocks_presenter.graph_data.to_json.html_safe
       @triggers = @stocks_presenter.triggers
-      puts @triggers
       @ticker = @stock.ticker
   end
 
@@ -81,5 +81,11 @@ class StocksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params
       params.require(:stock).permit(:title, :description)
+    end
+
+    def is_stock?
+      unless Stock.exists?(id: params[:id])
+        redirect_to user_path(current_user), notice: 'Stock does not exists.'
+      end
     end
 end

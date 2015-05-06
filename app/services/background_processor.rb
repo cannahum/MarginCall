@@ -7,6 +7,7 @@ class BackgroundProcessor
 
 	def perform
 		StockJob.perform
+		CollectionJob.update_collections
         TriggerJob.perform
 		BackgroundProcessor.new.async.later(15)
 	end
