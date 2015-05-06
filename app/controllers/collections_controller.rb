@@ -29,13 +29,13 @@ class CollectionsController < ApplicationController
     quantity = ""
     params.each do |vn| 
       name = eval(vn.to_s)
-      if name[0,5] == "ticker"
-        ticker << name + "+"
-      elsif name[0,7] == "quantity"
-        quantity << name + "+"
+      if name[0].include? "tick"
+        ticker.concat(name[1] + "+")
+      elsif name[0].include? "quan"
+        quantity.concat(name[1] + "+")
       end 
     end
-    @collection = Collection.new(user_id: session[:user_id], stock_id: ticker.chomp, quantity: quantity.chomp, nickname: params.fetch(:nickname) )
+    @collection = Collection.new(user_id: session[:user_id], stock_id: ticker.chomp!("+"), quantity: quantity.chomp!("+"), nickname: params.fetch(:nickname) )
     @collection = reorganize_params(@collection)
 
     respond_to do |format|
@@ -82,6 +82,6 @@ class CollectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
-      params.require(:collection).permit(:id, :user_id, :ticker0, :quantity0, :market_cap)
+      params.require(:collection).permit(:id, :user_id, :ticker0, :quantity0)
     end
 end

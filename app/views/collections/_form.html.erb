@@ -53,7 +53,14 @@
 <script type="text/javascript">
  var vcount = 1;
  function add_fields() {
-      document.createElement('DIV').innerHTML += '<div class = "form-inline"><label>Stock</label><input class = "form-control" name="ticker'+ vcount + '"/><label>Quantity</label><input class = "form-control" name="quantity' + vcount +'"/></div>';
+      var beforeDiv = document.getElementById('wrapper');
+      console.log("BEFORE BEFORE BEFORE" + beforeDiv);
+      var newDiv = document.createElement('DIV');
+      newDiv.innerHTML = '<div class = "form-inline"><label>Stock</label><input class = "form-control" name="ticker'+ vcount + '"/><label>Quantity</label><input class = "form-control" name="quantity' + vcount +'"/></div>';
+      console.log("NEW NEW NEW NEW NEW"+newDiv.innerHTML);
+      var parentDiv = beforeDiv.parentNode;
+      console.log("PARENT PARENT PARENT" + parentDiv)
+      parentDiv.insertBefore(newDiv, beforeDiv.nextSibling);
       vcount++;
   }
   function add_vcount(){
