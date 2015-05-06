@@ -79,6 +79,19 @@ class TriggersController < ApplicationController
     end
   end
 
+  def reactivate 
+    curr_trigger=Trigger.find(params[:foo])
+    curr_trigger.active=true
+    curr_trigger.save
+    redirect_to user_path(current_user)
+  end
+  def deactivate 
+    curr_trigger=Trigger.find(params[:foo])
+    curr_trigger.active=false
+    curr_trigger.save
+    redirect_to user_path(current_user)
+  end
+
   # DELETE /triggers/1
   # DELETE /triggers/1.json
   def destroy
