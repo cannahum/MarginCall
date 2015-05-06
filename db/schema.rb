@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505025805) do
+ActiveRecord::Schema.define(version: 20150506122937) do
 
   create_table "collections", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20150505025805) do
     t.string   "ticker"
     t.string   "company_name"
     t.decimal  "current_price",                 precision: 8, scale: 2
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
     t.decimal  "daily_min_price",               precision: 8, scale: 2
     t.decimal  "daily_max_price",               precision: 8, scale: 2
     t.decimal  "dividend_yield",                precision: 8, scale: 2
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150505025805) do
     t.decimal  "volume",                        precision: 8, scale: 2
     t.decimal  "eps",                           precision: 8, scale: 2
     t.decimal  "pe_ratio",                      precision: 8, scale: 2
+    t.boolean  "collection",                                            default: false
   end
 
   create_table "triggers", force: :cascade do |t|

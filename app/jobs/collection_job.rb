@@ -6,9 +6,10 @@ class CollectionJob
  		@collection = Collection.all
  		
  		@collection.each do |c|
+ 			user = c.user_id.to_s
  			stocks = c.stock_id.split(',')
  			quantities = c.quantity.split(',')
- 			index_value = c.index_value
+ 			index_value = c.current_price
  			total_value = c.total_value
 
  			stocks.map! { |s| s.to_i }
@@ -63,8 +64,13 @@ class CollectionJob
  
 			#now we have values we can store for this collection
  
+			c_id_in_stock_table = Stock.find_by(:ticker => "#{c.user_id},#{@c.nickname}")
+			sample_stock_id = Stock.find(stocks.first).id
+			dt = HistoricalStockPrice.where(:stock_id => sample_stock_id).maximum("last_traded_at")
+ 			
+ 			HistoricalStockPrice.save_historical_price c_id_in_stock_table, dt
 			c[:total_value] = new_total_value
-			c[:index_value] = index_value * (1 + (new_total_value / total_value - 1))
+			c[:current_price] = index_value * (1 + (new_total_value / total_value - 1))
 			c[:dividend_yield] = dividend_yield
 			c[:dividend_per_share] = dividend_per_share
 			c[:percentchange_from200day_avg] = percentchange_from200day_avg

@@ -17,7 +17,9 @@ class StockJob
   def self.construct_stock_string	
     ticker_string = ""
   	Stock.all.each do |stock|
+      if stock.collection == false
   			ticker_string << "+" + stock[:ticker]
+      end
   	end
     
     #return the string from the first element to the last. (ignore the initial "+")
