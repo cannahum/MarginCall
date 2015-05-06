@@ -6,12 +6,14 @@ class RssJob
 
   def self.getrss(ticker)
   	s = Stock.find_by(:ticker => ticker)
-  	if s.collection == false
+  	if s!=nil && s.collection == false
   	  url = "http://finance.yahoo.com/rss/headline?s=#{ticker}"
   	  rss = RSS::Parser.parse(open(url))
   	  return rss
-  	else	
-  	  return nil
+  	else
+    url = "http://finance.yahoo.com/rss/headline?s=INDU"
+    rss = RSS::Parser.parse(open(url))
+  	  return rss
   	end
   end
 end
