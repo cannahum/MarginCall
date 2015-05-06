@@ -92,7 +92,6 @@ class CollectionJob
 				sample_stock_id = Stock.find(stocks.first).id
 				dt = HistoricalStockPrice.where(:stock_id => sample_stock_id).maximum("last_traded_at")
 	 			HistoricalStockPrice.save_historical_price c_in_stock_table, dt
-	 			puts "hello"
 	 			puts daily_min
 				
 	 			c_in_stock_table[:current_price] = index_value * (1 + (new_total_value / total_value - 1))
