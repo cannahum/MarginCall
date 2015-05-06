@@ -23,6 +23,7 @@ require 'date'
 	end
 
 	def self.save_historical_price(stock, dt)
+		puts "WE ARE CURRENTLY SAVING #{stock.ticker}"
 		p = HistoricalStockPrice.new
 
 		p.stock_id = stock.id

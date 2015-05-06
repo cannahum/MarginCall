@@ -40,7 +40,8 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       if @collection.save
-        Stock.create(ticker:"#{collection.user_id},#{@collection.nickname}", current_price: 100, collection: true)
+        c_ticker = "#{@collection.user_id}+#{@collection.nickname}"
+        Stock.create(ticker: c_ticker, current_price: 100, collection: true)
         format.html { redirect_to user_path(current_user), notice: 'Collection was successfully created.' }
         format.json { render :show, status: :created, location: @collection }
       else

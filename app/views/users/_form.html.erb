@@ -30,16 +30,8 @@
                 <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password' %>
               </div>
               <div class="form-group">
-                <%= f.label :email1 , 'Preferred Email:'%><br>
+                <%= f.label :email1 , 'Email Address:'%><br>
                 <%= f.text_field :email1, class: 'form-control', placeholder: 'Primary Email' %>
-              </div>
-              <div class="form-group">
-                <%= f.label :email2 , 'Alternate Email:'%><br>
-                <%= f.text_field :email2, class: 'form-control', placeholder: 'Secondary Email' %>
-              </div>
-              <div class="form-groupo">
-                <%= f.label :p_number , 'Phone Number:'%><br>
-                <%= f.text_field :p_number, class: 'form-control', placeholder: 'Phone Number' %>
               </div>
               <div class="actions" style="margin-top: 5px">
                 <%= f.submit 'Submit', :class => 'btn btn-default' %> <%= link_to 'Back', homepage_path, :class => 'btn btn-default' %>
